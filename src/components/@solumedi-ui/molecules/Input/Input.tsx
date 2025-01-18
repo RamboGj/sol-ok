@@ -19,6 +19,7 @@ export const inputStyle = tv({
     error: {
       true: {
         hintStyle: 'text-error400 opacity-100',
+        fieldWrapper: 'ring-error400',
       },
       false: {},
     },
