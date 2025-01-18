@@ -3,9 +3,11 @@ import { Button } from '@/components/@solumedi-ui/atoms/Button/Button'
 import { Caption } from '@/components/@solumedi-ui/atoms/Caption/Caption'
 import { Checkbox } from '@/components/@solumedi-ui/atoms/Checkbox/Checkbox'
 import { Heading } from '@/components/@solumedi-ui/atoms/Heading/Heading'
+import { IconButton } from '@/components/@solumedi-ui/atoms/IconButton/IconButton'
 import { Link } from '@/components/@solumedi-ui/atoms/Link/Link'
 import { Paragraph } from '@/components/@solumedi-ui/atoms/Paragraph/Paragraph'
 import { Switch } from '@/components/@solumedi-ui/atoms/Switch/Switch'
+import { ListLinkItem } from '@/components/@solumedi-ui/molecules/ListLinkItem/ListLinkItem'
 
 export default function DesignSystemPage() {
   return (
@@ -34,6 +36,7 @@ export default function DesignSystemPage() {
           icon={<ArrowRightIcon />}
         />
         <Button label="Button" size="sm" variant="white" />
+        <IconButton icon={<ArrowRightIcon />} />
       </section>
 
       <section className="flex items-center gap-x-10 w-full" id="Texts">
@@ -54,9 +57,15 @@ export default function DesignSystemPage() {
         <Switch checked />
         <Switch checked={false} />
       </section>
+
       <section className="flex items-center gap-x-10 w-full" id="Checkbox">
         <Checkbox checked />
         <Checkbox checked={false} />
+      </section>
+
+      <section className="flex items-center gap-x-10 w-full" id="List item">
+        <ListLinkItem href={'#'} icon={<ArrowRightIcon />} label="Label" />
+        <ListLinkItem href={'#'} label="Label" />
       </section>
     </div>
   )
