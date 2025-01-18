@@ -7,12 +7,17 @@ import { IconButton } from '@/components/@solumedi-ui/atoms/IconButton/IconButto
 import { Link } from '@/components/@solumedi-ui/atoms/Link/Link'
 import { Paragraph } from '@/components/@solumedi-ui/atoms/Paragraph/Paragraph'
 import { Switch } from '@/components/@solumedi-ui/atoms/Switch/Switch'
+import { Input } from '@/components/@solumedi-ui/molecules/Input/Input'
+import { ListItem } from '@/components/@solumedi-ui/molecules/ListItem/ListItem'
 import { ListLinkItem } from '@/components/@solumedi-ui/molecules/ListLinkItem/ListLinkItem'
 
 export default function DesignSystemPage() {
   return (
     <div className="mx-auto flex flex-col gap-y-20 items-center px-20">
-      <Link href={'#'} label="Test" icon />
+      <section className="flex items-center gap-x-10 w-full" id="Links">
+        <Link href={'#'} label="Test" icon />
+        <Link href={'#'} label="Test" />
+      </section>
 
       <section className="flex items-center gap-x-10 w-full" id="Buttons">
         <Button
@@ -38,7 +43,6 @@ export default function DesignSystemPage() {
         <Button label="Button" size="sm" variant="white" />
         <IconButton icon={<ArrowRightIcon />} />
       </section>
-
       <section className="flex items-center gap-x-10 w-full" id="Texts">
         <Heading className="text-blue100" variant="h1">
           H1
@@ -52,20 +56,28 @@ export default function DesignSystemPage() {
 
         <Caption>Caption</Caption>
       </section>
-
       <section className="flex items-center gap-x-10 w-full" id="Switch">
         <Switch checked />
         <Switch checked={false} />
       </section>
-
       <section className="flex items-center gap-x-10 w-full" id="Checkbox">
         <Checkbox checked />
         <Checkbox checked={false} />
       </section>
-
-      <section className="flex items-center gap-x-10 w-full" id="List item">
+      <section
+        className="flex items-center gap-x-10 w-full"
+        id="List link item"
+      >
         <ListLinkItem href={'#'} icon={<ArrowRightIcon />} label="Label" />
         <ListLinkItem href={'#'} label="Label" />
+      </section>
+      <section className="flex items-center gap-x-10 w-full" id="List item">
+        <ListItem caption="Caption" icon={<ArrowRightIcon />} label="Label" />
+        <ListItem caption="Caption" label="Label" active />
+      </section>
+
+      <section className="flex items-center gap-x-10 w-full" id="Inputs">
+        <Input label="Label" hint="Error hint" placeholder="Placeholder" />
       </section>
     </div>
   )
