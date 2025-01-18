@@ -1,17 +1,11 @@
-import MultiCardCarousel from "@/components/carrousel"
-import "./globals.css"
-import CustomCursor from "@/components/section-cursor"
+import { Button } from '@/components/@solumedi-ui/atoms/Button/Button'
+import { Link } from '@/components/@solumedi-ui/atoms/Link/Link'
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <body>
-        <button className="animated-button" data-hover-text="Hover Me">
-            <span className="button-text">Hover Me</span>
-        </button>
-        
-        <MultiCardCarousel />
-
-        <CustomCursor />
-    </body>
+    <div className="mx-auto flex flex-col gap-y-20 items-center">
+      <Link href={'#'} label="Test" icon />
+      <Button label="Button" />
+    </div>
   )
 }
