@@ -5,7 +5,8 @@ export const buttonStyle = tv({
   slots: {
     wrapper:
       'w-fit group flex items-center rounded-[80px] relative before:font-manrope before:font-semibold before:px-4 overflow-hidden before:transition-all before:duration-200 before:content-[attr(data-hover-text)] before:absolute before:opacity-0 hover:before:opacity-100 before:translate-y-[100%] hover:before:translate-y-0',
-    labelStyle: 'leading-[150%] font-manrope font-semibold px-4',
+    labelStyle:
+      'leading-[150%] font-manrope font-semibold px-4 whitespace-nowrap',
     iconWrapper:
       'flex items-center text-neutral100 justify-center shrink-0 rounded-full transition-transform duration-500',
   },

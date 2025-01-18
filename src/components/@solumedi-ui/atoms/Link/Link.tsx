@@ -1,6 +1,6 @@
 import './link.css'
 
-import { ComponentProps } from 'react'
+import { ComponentProps, ReactNode } from 'react'
 import NextLink from 'next/link'
 
 import { ArrowUpRightIcon } from '@/components/@icons/arrow-up-right'
@@ -18,10 +18,15 @@ export const linkStyle = tv({
 
 export interface LinkProps extends ComponentProps<typeof NextLink> {
   label: string
-  icon?: boolean
+  icon?: ReactNode
 }
 
-export function Link({ label, className, icon, ...rest }: LinkProps) {
+export function Link({
+  label,
+  className,
+  icon = <ArrowUpRightIcon className="text-blue400" />,
+  ...rest
+}: LinkProps) {
   const { labelStyle, wrapper } = linkStyle({ className })
 
   return (
@@ -29,7 +34,7 @@ export function Link({ label, className, icon, ...rest }: LinkProps) {
       <Paragraph size="md" className={labelStyle()}>
         {label}
       </Paragraph>
-      {icon && <ArrowUpRightIcon className="text-blue400" />}
+      {icon && icon}
     </NextLink>
   )
 }
