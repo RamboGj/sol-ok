@@ -62,7 +62,7 @@ export function Button({ className, variant, size, label, icon }: ButtonProps) {
   })
 
   return (
-    <button data-hover-text={label} className={wrapper()}>
+    <button data-hover-text={label} className={wrapper({ className })}>
       <span
         className={labelStyle({
           className:

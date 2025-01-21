@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+// import plugin from 'tailwindcss'
 
 export default {
   darkMode: ['class'],
@@ -113,5 +114,13 @@ export default {
       exitToRight: 'exitToRight 250ms ease',
     },
   },
-  plugins: [],
+  // plugins: [
+  //   plugin(({ matchUtilities }) => {
+  //     matchUtilities({
+  //       perspective: (value) => ({
+  //         perspective: value,
+  //       }),
+  //     })
+  //   }),
+  // ],
 } satisfies Config

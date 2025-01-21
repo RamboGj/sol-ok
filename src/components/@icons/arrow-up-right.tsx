@@ -18,15 +18,15 @@ const SvgComponent = (
       d="M15.9498 8.05005L8 16.0001"
       stroke="currentColor"
       strokeWidth="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M8 8L15.95 8.04897L16 16.0001"
       stroke="currentColor"
       strokeWidth="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 )

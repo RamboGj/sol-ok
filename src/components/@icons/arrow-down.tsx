@@ -18,8 +18,8 @@ const SvgComponent = (
       d="M8 10L12 14L16 10"
       stroke="currentColor"
       strokeWidth="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 )
