@@ -54,7 +54,14 @@ export interface ButtonProps
   icon?: ReactNode
 }
 
-export function Button({ className, variant, size, label, icon }: ButtonProps) {
+export function Button({
+  className,
+  variant,
+  size,
+  label,
+  icon,
+  ...rest
+}: ButtonProps) {
   const { iconWrapper, labelStyle, wrapper } = buttonStyle({
     className,
     size,
@@ -62,7 +69,11 @@ export function Button({ className, variant, size, label, icon }: ButtonProps) {
   })
 
   return (
-    <button data-hover-text={label} className={wrapper({ className })}>
+    <button
+      data-hover-text={label}
+      className={wrapper({ className })}
+      {...rest}
+    >
       <span
         className={labelStyle({
           className:
