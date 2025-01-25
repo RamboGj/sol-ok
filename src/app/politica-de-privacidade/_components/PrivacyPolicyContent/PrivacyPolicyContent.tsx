@@ -97,7 +97,7 @@ export function PrivacyPolicyContent() {
   ]
 
   return (
-    <main className="flex flex-col max-w-[892px] mx-auto mt-[325px] mb-[120px]">
+    <main className="flex flex-col md:max-w-[768px] xl:max-w-[892px] mx-6 sm:mx-12 lg:mx-auto mt-[245px] xl:mt-[325px] mb-[120px]">
       <Heading variant="h1">Política de Privacidade</Heading>
       <Paragraph className="block mt-6 text-blue500" size="md">
         Última atualização em 17 Maio de 2022
