@@ -4,7 +4,7 @@ import { Button } from '@/components/@solumedi-ui/atoms/Button/Button'
 import { Heading } from '@/components/@solumedi-ui/atoms/Heading/Heading'
 import { IconButton } from '@/components/@solumedi-ui/atoms/IconButton/IconButton'
 import { Paragraph } from '@/components/@solumedi-ui/atoms/Paragraph/Paragraph'
-import { Footer } from '@/components/molecules/Footer/Footer'
+import { Footer } from '@/components/molecules/Footer'
 import { Header } from '@/components/molecules/Header/Header'
 
 import * as Accordion from '@radix-ui/react-accordion'
@@ -181,7 +181,12 @@ export default function FAQPage() {
         </div>
       </section>
 
-      <Footer />
+      <Footer.Root>
+        <Footer.Logo />
+        <Footer.Links />
+        <Footer.Social />
+        <Footer.Copyright />
+      </Footer.Root>
     </>
   )
 }
