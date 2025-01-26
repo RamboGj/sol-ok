@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss'
 // import plugin from 'tailwindcss'
+import scrollbar from 'tailwind-scrollbar'
 
 export default {
   darkMode: ['class'],
@@ -124,13 +125,5 @@ export default {
       slideUp: 'slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)',
     },
   },
-  // plugins: [
-  //   plugin(({ matchUtilities }) => {
-  //     matchUtilities({
-  //       perspective: (value) => ({
-  //         perspective: value,
-  //       }),
-  //     })
-  //   }),
-  // ],
+  plugins: [scrollbar],
 } satisfies Config
