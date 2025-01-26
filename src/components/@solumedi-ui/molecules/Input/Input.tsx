@@ -8,7 +8,7 @@ export const inputStyle = tv({
   slots: {
     wrapper: 'w-full flex flex-col gap-y-2 items-start group',
     fieldWrapper:
-      'flex items-center gap-x-4 px-6 rounded-[80px] h-[64px] ring-1 ring-blue200 group-hover:ring-blue400 group-focus-within:ring-blue400 group-focus-within:ring-2 transition-shadow duration-500',
+      'flex items-center bg-neutral100 gap-x-4 px-6 rounded-[80px] h-[64px] ring-1 ring-blue200 group-hover:ring-blue400 group-focus-within:ring-blue400 group-focus-within:ring-2 transition-shadow duration-500',
     fieldStyle:
       'flex-1 focus:outline-none text-blue500 font-semibold placeholder:text-blue400 placeholder:font-semibold font-manrope',
     labelStyle: 'text-blue400',
@@ -54,7 +54,7 @@ export function Input({
   })
 
   return (
-    <div className={wrapper()}>
+    <div className={wrapper({ className })}>
       {label && (
         <Paragraph className={labelStyle()} size="sm">
           {label}

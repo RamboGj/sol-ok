@@ -424,7 +424,7 @@ export default function HomePage() {
           <Link
             label="Ir para o blog"
             href="/blog"
-            icon={<ArrowUpRightIcon />}
+            icon={<ArrowUpRightIcon className="text-blue400" />}
           />
         </div>
 
