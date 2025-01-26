@@ -14,7 +14,7 @@ import { SearchIcon } from '@/components/@icons/search'
 
 import { EspecialidadesCarrousel } from '@/components/molecules/EspecialidadesCarrousel/EspecialidadesCarrousel'
 
-export default function HomePage() {
+export default function ExpertisesPage() {
   const especialidadesLinks = [
     {
       title: 'Cuidado com os olhos',
@@ -117,7 +117,7 @@ export default function HomePage() {
   ]
 
   return (
-    <>
+    <div className="overflow-x-hidden">
       <Header />
 
       <main className="w-full mt-[194px]">
@@ -138,7 +138,7 @@ export default function HomePage() {
           </div>
         </div>
 
-        <EspecialidadesCarrousel />
+        <EspecialidadesCarrousel className="mt-20" />
       </main>
 
       <section
@@ -186,6 +186,6 @@ export default function HomePage() {
         <Footer.Social />
         <Footer.Copyright />
       </Footer.Root>
-    </>
+    </div>
   )
 }

@@ -1,87 +1,97 @@
-import Image from 'next/image'
-import * as Accordion from '@radix-ui/react-accordion'
-
+import { PricingCard } from '@/app/_components/PricingCard/PricingCard'
 import { ArrowRightIcon } from '@/components/@icons/arrow-right'
 import { Button } from '@/components/@solumedi-ui/atoms/Button/Button'
 import { Heading } from '@/components/@solumedi-ui/atoms/Heading/Heading'
 import { Paragraph } from '@/components/@solumedi-ui/atoms/Paragraph/Paragraph'
 import { Footer } from '@/components/molecules/Footer'
 import { Header } from '@/components/molecules/Header/Header'
+import Image from 'next/image'
+
+import * as Accordion from '@radix-ui/react-accordion'
 import { IconButton } from '@/components/@solumedi-ui/atoms/IconButton/IconButton'
-
-import { PricingCard } from '@/app/_components/PricingCard/PricingCard'
 import { DeleteIcon } from '@/components/@icons/delete'
-import { EspecialidadesCarrousel } from '@/components/molecules/EspecialidadesCarrousel/EspecialidadesCarrousel'
-import { ListLinkItem } from '@/components/@solumedi-ui/molecules/ListLinkItem/ListLinkItem'
+import { CardEspecialidade } from '@/app/_components/CardEspecialidade/CardEspecialidade'
 
-export default function ExpertisePage() {
+export default function ProcedurePage() {
   const faqList = [
     {
-      question: 'Problemas de visão',
-      answer: 'Problemas de visão',
+      question: 'Dentes',
+      answer: 'Dentes',
     },
     {
-      question: 'Dor ou irritação nos olhos',
-      answer: 'Dor ou irritação nos olhos',
+      question: 'Ossos',
+      answer: 'Ossos',
     },
     {
-      question: 'Lesões oculares ',
-      answer: 'Lesões oculares ',
+      question: 'Pulmão',
+      answer: 'Pulmão',
+    },
+    {
+      question: 'Abdômen',
+      answer: 'Abdômen',
     },
   ]
 
-  const otherExamsAndProcedures = [
+  const procedures = [
     {
-      label: 'Angiofloreceinografia',
       href: '#',
+      imageHref: '/procedimentos/ultra_sonografia.png',
+      title: 'Ultras-sonografia',
     },
     {
-      label: 'Biometria Ultrassónica',
       href: '#',
+      imageHref: '/procedimentos/hemograma.png',
+      title: 'Hemograma',
     },
     {
-      label: 'Cirurgia de Cataratas',
       href: '#',
+      imageHref: '/procedimentos/eletro_falograma.png',
+      title: 'Eletroence-falograma',
     },
     {
-      label: 'Mapeamento de Retina',
       href: '#',
+      imageHref: '/procedimentos/eletro_cardiograma.png',
+      title: 'Eletro-cardiograma',
     },
     {
-      label: 'Paquimetria',
       href: '#',
+      imageHref: '/procedimentos/colonoscopia.png',
+      title: 'Colonoscopia',
     },
     {
-      label: 'Topografia de Córnea',
       href: '#',
+      imageHref: '/procedimentos/tomografia.png',
+      title: 'Tomografia',
     },
   ]
 
   return (
-    <div className="overflow-x-hidden">
+    <>
       <Header />
 
       <main className="w-full ">
         <div className="flex justify-between items-end py-20 mx-[210px]">
           <div className="max-w-[586px]">
-            <Heading variant="h1">Oftalmologista</Heading>
+            <Heading variant="h1">Raio-X</Heading>
 
             <Paragraph className="block mt-10 text-blue500">
-              Médico especializado em diagnosticar e tratar doenças e problemas
-              relacionados aos olhos e à visão
+              Raio-X é um exame de diagnóstico por imagem não invasivo que
+              utiliza doses controladas de radiação ionizante para o estudo das
+              estruturas internas do corpo sem a necessidade de cortes ou
+              cirurgia.
             </Paragraph>
           </div>
 
           <div className="flex mt-10 gap-x-4">
-            <Button label="Agendar oftalmologista" icon={<ArrowRightIcon />} />
+            <Button label="Agendar Raio-X" icon={<ArrowRightIcon />} />
           </div>
         </div>
 
         <Image
           height={643}
           width={1502}
-          src="/procedimentos/oftalmologista.png"
-          alt="A little girl wearing an eye device."
+          src="/procedimentos/raio_x.png"
+          alt="Doctor with an X-ray in hands."
           className="mx-auto"
         />
       </main>
@@ -89,32 +99,44 @@ export default function ExpertisePage() {
       <section id="content" className="max-w-[892px] mx-auto">
         <div className="py-[120px]">
           <Paragraph size="md" className="text-blue500">
-            Estuda, diagnostica e trata as doenças relacionadas ao olho e erros
-            de refração apresentados pelos olhos e seus anexos, condições que
-            podem causar a miopia e o astigmatismo, distúrbios que podem reduzir
-            a capacidade de um indivíduo de enxergar e de realizar suas tarefas
-            do cotidiano.
+            O raio-X é um tipo de radiação semelhante à luz, mas com um
+            comprimento de onda muito menor que é invisível aos olhos. Essa
+            característica faz com que ele atravesse vários tecidos do corpo
+            humano, embora seja absorvido pelos ossos e outras estruturas.
           </Paragraph>
           <br />
           <Paragraph size="md" className="text-blue500">
-            Os tratamentos receitados por um médico oftalmologista consistem no
-            uso de óculos como auxílio para a visão, colírios e outros
-            medicamentos para tratar alergias e condições diversas. No entanto,
-            alguns oftalmologistas podem receitar tratamentos que incluem a
-            intervenção cirúrgica, como o tratamento do ceratocone e cirurgias
-            de correção de miopia e estrabismo.
+            Para fazer o exame, o paciente é posicionado em uma maca ou fica em
+            pé de forma que a região do corpo a ser estudada fique no campo de
+            ação da máquina de radiografia. Em seguida, o aparelho emite os
+            raios-X que serão absorvidos em diferentes intensidades conforme a
+            densidade dos tecidos.
           </Paragraph>
+          <br />
+          <Paragraph size="md" className="text-blue500">
+            A porção dos raios-X que atravessa o corpo sem ser absorvida chega
+            até um filme fotográfico ou detector digital, dando origem a imagens
+            bidimensionais com diferentes tons de claro e escuro.
+          </Paragraph>
+          <br />
+          <Paragraph size="md" className="text-blue500">
+            Tecidos mais densos, como os ossos, absorvem a maior parte da
+            radiação, por isso eles aparecem em tons mais claros nas imagens de
+            raio-X. Se houver uma lesão nesse tecido, como uma fratura, ela
+            aparece em um tom mais escuro.
+          </Paragraph>
+          <br />
         </div>
 
         <div>
           <Heading variant="h2" className="text-blue500">
-            Compare valores de oftalmologistas entre a SoluMedi e o mercado
+            Compare valores de Raio-X entre a SoluMedi e o mercado
           </Heading>
 
           <div className="flex gap-x-6 my-[120px]">
             <PricingCard
-              title="Oftalmologista na rede particular"
-              price="R$ 180"
+              title="Raio-X na rede particular"
+              price="R$ 220"
               subFeatures={[
                 {
                   label: 'Valores altos',
@@ -128,10 +150,10 @@ export default function ExpertisePage() {
             />
             <PricingCard
               best
-              title="Oftalmologista com a Solumedi"
-              price="R$ 94"
+              title="Raio-X com a Solumedi"
+              price="R$ 41"
               highlight
-              highlightText="Economize até 48%"
+              highlightText="Economize até 82%"
               subFeatures={[
                 {
                   label: 'Sem filas',
@@ -152,8 +174,7 @@ export default function ExpertisePage() {
         id="mainReferrals"
       >
         <Heading className="text-blue500" variant="h2">
-          Exames e procedimentos realizados por oftalmologistas parceiros da
-          SoluMedi
+          Principais indicações de Raio-X
         </Heading>
 
         <Accordion.Root
@@ -191,33 +212,24 @@ export default function ExpertisePage() {
       </section>
 
       <section
-        className="flex flex-col gap-y-14 max-w-[892px] mx-auto mb-[120px]"
-        id="mainReferrals"
-      >
-        <Heading className="text-blue500" variant="h2">
-          Doenças relacionadas
-        </Heading>
-
-        <ul className="w-full block list-none max-w-[892px]">
-          {otherExamsAndProcedures.map(({ href, label }) => {
-            return (
-              <li key={label}>
-                <ListLinkItem label={label} href={href} />
-              </li>
-            )
-          })}
-        </ul>
-      </section>
-
-      <section
-        className="flex flex-col py-[120px] gap-y-14"
+        className="flex flex-col py-[120px] gap-y-14 mx-[210px]"
         id="takeALookAtOtherProcedures"
       >
-        <Heading variant="h2" className="text-blue500 mx-[210px]">
+        <Heading variant="h2" className="text-blue500">
           Veja outros procedimentos realizados pela SoluMedi
         </Heading>
 
-        <EspecialidadesCarrousel />
+        <ul className="flex gap-x-6">
+          {procedures.map((procedure) => {
+            return (
+              <CardEspecialidade
+                size="sm"
+                key={procedure.title}
+                {...procedure}
+              />
+            )
+          })}
+        </ul>
       </section>
       <Footer.Root>
         <Footer.Logo />
@@ -225,6 +237,6 @@ export default function ExpertisePage() {
         <Footer.Social />
         <Footer.Copyright />
       </Footer.Root>
-    </div>
+    </>
   )
 }

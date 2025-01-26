@@ -1,58 +1,45 @@
-'use client'
-
 import { CardEspecialidade } from '@/app/_components/CardEspecialidade/CardEspecialidade'
 import { ArrowLeftIcon } from '@/components/@icons/arrow-left'
 import { ArrowRightIcon } from '@/components/@icons/arrow-right'
 import { IconButton } from '@/components/@solumedi-ui/atoms/IconButton/IconButton'
-import { cn } from '@/lib/utils'
-import { ComponentProps, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
-export type EspecialidadesCarrouselProps = ComponentProps<'ul'>
-
-export function EspecialidadesCarrousel({
-  className,
-  ...rest
-}: EspecialidadesCarrouselProps) {
+export function ProceduresCarrousel() {
   const carrouselRef = useRef<HTMLUListElement>(null)
 
   const [index, setIndex] = useState(0)
   const [isAbleToGoNext, setIsAbleToGoNext] = useState(false)
 
-  const especialidades = [
+  const procedures = [
     {
-      title: 'Cuidado com os olhos',
-      imageHref: '/especialidades/olhos.png',
       href: '#',
+      imageHref: '/procedimentos/ultra_sonografia.png',
+      title: 'Ultras-sonografia',
     },
     {
-      title: 'Saúde bucal',
-      imageHref: '/especialidades/saude_bucal.png',
       href: '#',
+      imageHref: '/procedimentos/hemograma.png',
+      title: 'Hemograma',
     },
     {
-      title: 'Mente saudável',
-      imageHref: '/especialidades/mente.png',
       href: '#',
+      imageHref: '/procedimentos/eletro_falograma.png',
+      title: 'Eletroence-falograma',
     },
     {
-      title: 'Cuidados da pele',
-      imageHref: '/especialidades/cuidados_pele.png',
       href: '#',
+      imageHref: '/procedimentos/eletro_cardiograma.png',
+      title: 'Eletro-cardiograma',
     },
     {
-      title: 'Coração em dia',
-      imageHref: '/especialidades/coracao.png',
       href: '#',
+      imageHref: '/procedimentos/colonoscopia.png',
+      title: 'Colonoscopia',
     },
     {
-      title: 'Saúde da mulher',
-      imageHref: '/especialidades/saude_da_mulher.png',
       href: '#',
-    },
-    {
-      title: 'Criança saudável',
-      imageHref: '/especialidades/crianca_saudavel.png',
-      href: '#',
+      imageHref: '/procedimentos/tomografia.png',
+      title: 'Tomografia',
     },
   ]
 
@@ -92,7 +79,7 @@ export function EspecialidadesCarrousel({
   useEffect(() => {
     if (carrouselRef.current) {
       const maxIndex = Math.ceil(
-        (carrouselRef.current.scrollWidth + 209 - window.innerWidth) / 209,
+        (carrouselRef.current.scrollWidth - window.innerWidth) / 209,
       )
 
       if (index + 1 > maxIndex) {
@@ -104,8 +91,14 @@ export function EspecialidadesCarrousel({
   useEffect(() => {
     const checkCarouselNavigation = () => {
       if (carrouselRef.current) {
-        const canGoNext =
-          carrouselRef.current.scrollWidth + 209 > window.innerWidth
+        const canGoNext = carrouselRef.current.scrollWidth > window.innerWidth
+
+        console.log(
+          'carrouselRef.current.scrollWidth ->',
+          carrouselRef.current.scrollWidth,
+        )
+
+        console.log('window.innerWidth ->', window.innerWidth)
 
         setIsAbleToGoNext(canGoNext)
       }
@@ -126,16 +119,13 @@ export function EspecialidadesCarrousel({
         transform: `translateX(-${209 * index}px)`,
       }}
       ref={carrouselRef}
-      className={cn(
-        'flex gap-x-6 ml-[210px] pr-[210px] relative transition-transform duration-500',
-        className,
-      )}
-      {...rest}
+      className="flex gap-x-6 mt-20 ml-[210px] pr-[210px] relative transition-transform duration-500"
     >
-      {especialidades.map(({ href, imageHref, title }) => {
+      {procedures.map(({ href, imageHref, title }) => {
         return (
           <li key={title}>
             <CardEspecialidade
+              size="sm"
               title={title}
               href={href}
               imageHref={imageHref}
