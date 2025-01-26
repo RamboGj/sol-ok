@@ -16,6 +16,7 @@ import {
 } from './_components/PricingCard/PricingCard'
 import { Caption } from '@/components/@solumedi-ui/atoms/Caption/Caption'
 import { StepCard } from '@/components/molecules/StepCard/StepCard'
+import { Testimonials } from './_components/Testimonials/Testimonials'
 
 export default function HomePage() {
   const especialidades = [
@@ -361,6 +362,8 @@ export default function HomePage() {
           })}
         </ul>
       </section>
+
+      <Testimonials />
     </div>
   )
 }
