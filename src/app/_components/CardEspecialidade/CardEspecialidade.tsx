@@ -44,13 +44,8 @@ export function CardEspecialidade({
   className,
   size,
 }: CardEspecialidadeProps) {
-  const {
-    backgroundGradient,
-    backgroundStyle,
-    buttonStyle,
-    titleStyle,
-    wrapper,
-  } = cardEspecialidadeStyle({ className, size })
+  const { backgroundGradient, backgroundStyle, buttonStyle, titleStyle } =
+    cardEspecialidadeStyle({ className, size })
 
   return (
     <NextLink
