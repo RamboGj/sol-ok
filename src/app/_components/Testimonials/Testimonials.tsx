@@ -94,7 +94,7 @@ export function Testimonials() {
             <li key={index}>
               <div
                 data-in-view={activeIndex === index}
-                className="w-[892px] select-none data-[in-view=true]:opacity-100 opacity-[24%]"
+                className="w-[892px] select-none scale-90 transition-all duration-300 data-[in-view=true]:opacity-100 data-[in-view=true]:scale-100 opacity-[24%]"
               >
                 <Heading className="text-blue500" variant="h2">
                   {description}
