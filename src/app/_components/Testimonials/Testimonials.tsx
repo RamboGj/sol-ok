@@ -53,25 +53,10 @@ export function Testimonials() {
       setPosition({ x: e.clientX, y: e.clientY })
     }
 
-    const handleMouseEnterTargets = () => setIsHovering(true)
-    const handleMouseLeaveTargets = () => setIsHovering(false)
-
     window.addEventListener('mousemove', handleMouseMove)
-
-    // Select elements you want to trigger custom cursor
-    const hoverTargets = document.querySelectorAll('.custom-cursor-trigger')
-
-    hoverTargets.forEach((target) => {
-      target.addEventListener('mouseenter', handleMouseEnterTargets)
-      target.addEventListener('mouseleave', handleMouseLeaveTargets)
-    })
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
-      hoverTargets.forEach((target) => {
-        target.removeEventListener('mouseenter', handleMouseEnterTargets)
-        target.removeEventListener('mouseleave', handleMouseLeaveTargets)
-      })
     }
   }, [])
 
@@ -90,6 +75,8 @@ export function Testimonials() {
 
   return (
     <section
+      onMouseEnter={() => setIsHovering(true)}
+      onMouseLeave={() => setIsHovering(false)}
       data-hovering={isHovering}
       ref={screenRef}
       className="bg-blue100 py-[120px] custom-cursor-trigger  data-[hovering=true]:cursor-none"
@@ -129,7 +116,7 @@ export function Testimonials() {
       </ul>
 
       <div
-        className={`fixed pointer-events-none z-50 ${isHovering ? 'block cursor-none' : 'hidden'}`}
+        className={`fixed pointer-events-none z-50 scale-0 ${isHovering ? 'block cursor-none' : 'hidden'}`}
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,

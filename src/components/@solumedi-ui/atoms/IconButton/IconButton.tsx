@@ -36,5 +36,5 @@ export function IconButton({ className, variant, icon }: IconButtonProps) {
     variant,
   })
 
-  return <button className={wrapper()}>{icon}</button>
+  return <button className={wrapper({ className })}>{icon}</button>
 }

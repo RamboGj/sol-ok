@@ -17,6 +17,11 @@ import {
 import { Caption } from '@/components/@solumedi-ui/atoms/Caption/Caption'
 import { StepCard } from '@/components/molecules/StepCard/StepCard'
 import { Testimonials } from './_components/Testimonials/Testimonials'
+import { Link } from '@/components/@solumedi-ui/atoms/Link/Link'
+import { ArrowUpRightIcon } from '@/components/@icons/arrow-up-right'
+import { PostCard } from '@/components/molecules/PostCard/PostCard'
+import { Footer } from '@/components/molecules/Footer'
+import { Banner } from '@/components/molecules/Banner/Banner'
 
 export default function HomePage() {
   const especialidades = [
@@ -147,6 +152,51 @@ export default function HomePage() {
       step: 5,
       description:
         'Depois é só comparecer na clínica ou laboratório no dia agendado!',
+    },
+  ]
+
+  const symptoms = [
+    {
+      imageHref: '/problems/endoscopia.png',
+      theme: 'Saúde',
+      title: 'Endoscopia: Quando ela é necessária?',
+      href: '/blog',
+    },
+    {
+      imageHref: '/problems/gastrite.png',
+      theme: 'Saúde',
+      title: '5 sintomas da gastrite nervosa',
+      href: '/blog',
+    },
+    {
+      imageHref: '/problems/diabetes.png',
+      theme: 'Saúde',
+      title:
+        'Este hábito diário é responsável por 70% dos casos de diabetes; saiba como se proteger',
+      href: '/blog',
+    },
+    {
+      imageHref: '/problems/gastrite_2.png',
+      theme: 'Saúde',
+      title: 'Gastrite: aquele incomodo que deve ser tratado!',
+      href: '/blog',
+    },
+  ]
+
+  const banners = [
+    {
+      title: 'Seja um franqueado',
+      description:
+        'Fature em média R$ 1,8 milhão por ano com a rede de franquias que mais cresce no Brasil.',
+      cta: 'Saiba mais',
+      bannerImageUrl: '/banner.png',
+    },
+    {
+      title: 'Profissional da saúde',
+      description:
+        'Tenha mais pacientes com a SoluMedi ampliando sua rede de atendimentos.',
+      cta: 'Cadastre-se',
+      bannerImageUrl: '/banner2.png',
     },
   ]
 
@@ -364,6 +414,59 @@ export default function HomePage() {
       </section>
 
       <Testimonials />
+
+      <section className="py-[120px] mx-14" id="stayAware">
+        <div className="w-full flex items-center justify-between">
+          <Heading variant="h2" className="text-blue500">
+            Fique por dentro
+          </Heading>
+
+          <Link
+            label="Ir para o blog"
+            href="/blog"
+            icon={<ArrowUpRightIcon />}
+          />
+        </div>
+
+        <ul className="mt-20 grid grid-cols-4 items-stretch gap-x-6">
+          {symptoms.map(({ href, imageHref, theme, title }) => {
+            return (
+              <li key={title}>
+                <PostCard
+                  href={href}
+                  imageHref={imageHref}
+                  theme={theme}
+                  title={title}
+                />
+              </li>
+            )
+          })}
+        </ul>
+      </section>
+
+      <section id="banners" className="py-[120px] mx-14">
+        <ul className="grid grid-cols-2 gap-x-6">
+          {banners.map(({ bannerImageUrl, cta, description, title }) => {
+            return (
+              <li key={title}>
+                <Banner
+                  bannerImageUrl={bannerImageUrl}
+                  cta={cta}
+                  description={description}
+                  title={title}
+                />
+              </li>
+            )
+          })}
+        </ul>
+      </section>
+
+      <Footer.Root>
+        <Footer.Logo />
+        <Footer.Links />
+        <Footer.Social />
+        <Footer.Copyright />
+      </Footer.Root>
     </div>
   )
 }
