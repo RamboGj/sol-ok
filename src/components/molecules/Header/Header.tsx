@@ -114,7 +114,7 @@ export function Header() {
 
                 {/* Individual viewport for each dropdown */}
                 <div className="absolute left-0 top-full perspective-[2000px]">
-                  <NavigationMenu.Content className="relative mt-2.5 rounded-[32px] bg-neutral100 overflow-hidden data-[state=closed]:animate-scaleOut data-[state=open]:animate-scaleIn data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft">
+                  <NavigationMenu.Content className="relative mt-2.5 rounded-[32px] drop-shadow-[0_4px_40px_#2A4F7237] bg-neutral100 overflow-hidden data-[state=closed]:animate-scaleOut data-[state=open]:animate-scaleIn data-[motion=from-end]:animate-enterFromRight data-[motion=from-start]:animate-enterFromLeft data-[motion=to-end]:animate-exitToRight data-[motion=to-start]:animate-exitToLeft">
                     <ul className="flex flex-col">
                       {links.map(({ href, label }) => {
                         return (

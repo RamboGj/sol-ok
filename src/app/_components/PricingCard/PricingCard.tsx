@@ -6,13 +6,17 @@ import { Caption } from '@/components/@solumedi-ui/atoms/Caption/Caption'
 import { Heading } from '@/components/@solumedi-ui/atoms/Heading/Heading'
 import { Paragraph } from '@/components/@solumedi-ui/atoms/Paragraph/Paragraph'
 import { ComponentProps } from 'react'
+import { tv, VariantProps } from 'tailwind-variants'
 
 export interface PricingProps {
+  cta?: string
+  highlightText?: string
   highlight?: boolean
+  best?: boolean
   title: string
   price: string
-  priceLabel: string
-  features: {
+  priceLabel?: string
+  features?: {
     price: string
     priceLabel: string
   }[]
@@ -21,7 +25,45 @@ export interface PricingProps {
   }[]
 }
 
-export type PricingCardProps = ComponentProps<'div'> & PricingProps
+;<div className="py-2 px-4 bg-green100 rounded-full absolute top-4 right-4">
+  <Caption className="text-green400">Mais procurado</Caption>
+</div>
+
+export const pricingCardStyle = tv({
+  slots: {
+    wrapper:
+      'w-full flex flex-1 flex-col gap-y-8 relative py-20 px-14 border border-blue200 rounded-[20px]',
+    highligthWrapper:
+      'py-2 px-4 bg-green100 rounded-full absolute top-4 right-4',
+    highlightTextStyle: 'text-green400',
+    titleStyle: 'text-blue500',
+    subfeatureWrapper: 'flex flex-col gap-y-1',
+    subfeatureItemWrapper: 'flex items-center gap-x-2',
+    subfeatureIcon: 'text-blue400',
+    subfeatureText: 'text-blue500',
+    buttonStyle: 'w-full justify-center',
+    featuresWrapper: 'flex gap-x-8',
+    featureText: 'text-blue500',
+    priceText: 'text-blue400',
+  },
+  variants: {
+    best: {
+      true: {
+        wrapper: 'bg-blue400 border-none',
+        priceText: 'text-neutral100',
+        titleStyle: 'text-neutral100',
+        subfeatureIcon: 'text-blue200',
+        subfeatureText: 'text-neutral100',
+        featureText: 'text-neutral100',
+      },
+      false: {},
+    },
+  },
+})
+
+export type PricingCardProps = ComponentProps<'div'> &
+  PricingProps &
+  VariantProps<typeof pricingCardStyle>
 
 export function PricingCard({
   title,
@@ -30,47 +72,71 @@ export function PricingCard({
   priceLabel,
   features,
   subFeatures,
+  className,
+  best,
+  cta = 'Agendar agora',
+  highlightText = 'Mais procurado',
   ...rest
 }: PricingCardProps) {
+  const {
+    wrapper,
+    buttonStyle,
+    featureText,
+    featuresWrapper,
+    highlightTextStyle,
+    highligthWrapper,
+    subfeatureIcon,
+    subfeatureItemWrapper,
+    subfeatureText,
+    subfeatureWrapper,
+    priceText,
+    titleStyle,
+  } = pricingCardStyle({ className, best })
+
   return (
-    <div
-      className="w-full flex flex-1 flex-col gap-y-8 relative py-20 px-14 border border-blue200 rounded-[20px]"
-      {...rest}
-    >
+    <div className={wrapper({ className })} {...rest}>
       {highlight && (
-        <div className="py-2 px-4 bg-green100 rounded-full absolute top-4 right-4">
-          <Caption className="text-green400">Mais procurado</Caption>
+        <div className={highligthWrapper()}>
+          <Caption className={highlightTextStyle()}>{highlightText}</Caption>
         </div>
       )}
 
-      <Heading variant="h3" className="text-blue500">
+      <Heading variant="h3" className={titleStyle()}>
         {title}
       </Heading>
 
       <div>
-        <Heading variant="h1">{price}</Heading>
-        <Paragraph size="md">{priceLabel}</Paragraph>
+        <Heading className={priceText()} variant="h1">
+          {price}
+        </Heading>
+        {priceLabel && (
+          <Paragraph className={priceText()} size="md">
+            {priceLabel}
+          </Paragraph>
+        )}
       </div>
 
-      <ul className="flex gap-x-8">
-        {features.map((feature, index) => (
-          <li key={index}>
-            <Heading variant="h4" className="text-blue500">
-              {feature.price}
-            </Heading>
-            <Paragraph className="text-blue500" size="md">
-              {feature.priceLabel}
-            </Paragraph>
-          </li>
-        ))}
-      </ul>
+      {features && (
+        <ul className={featuresWrapper()}>
+          {features.map((feature, index) => (
+            <li key={index}>
+              <Heading variant="h4" className={featureText()}>
+                {feature.price}
+              </Heading>
+              <Paragraph className={featureText()} size="md">
+                {feature.priceLabel}
+              </Paragraph>
+            </li>
+          ))}
+        </ul>
+      )}
 
-      <ul className="flex flex-col gap-y-1">
+      <ul className={subfeatureWrapper()}>
         {subFeatures.map(({ label }, index) => (
           <li key={index}>
-            <div className="flex items-center gap-x-2">
-              <CheckIcon className="text-blue400" />
-              <Paragraph className="text-blue500" size="sm">
+            <div className={subfeatureItemWrapper()}>
+              <CheckIcon className={subfeatureIcon()} />
+              <Paragraph className={subfeatureText()} size="sm">
                 {label}
               </Paragraph>
             </div>
@@ -78,11 +144,13 @@ export function PricingCard({
         ))}
       </ul>
 
-      <Button
-        className="w-full justify-center"
-        variant="blue"
-        label="Agendar agora"
-      />
+      {cta && (
+        <Button
+          className={buttonStyle()}
+          variant={best ? 'white' : 'blue'}
+          label={cta}
+        />
+      )}
     </div>
   )
 }
