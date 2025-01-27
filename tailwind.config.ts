@@ -110,6 +110,14 @@ export default {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0px' },
         },
+        'marquee-rtl': {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        },
+        'marquee-ltr': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0%)' },
+        },
       },
     },
     animation: {
@@ -123,7 +131,10 @@ export default {
       exitToRight: 'exitToRight 250ms ease',
       slideDown: 'slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1)',
       slideUp: 'slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)',
+      'marquee-rtl': 'marquee-rtl 25s linear infinite',
+      'marquee-ltr': 'marquee-ltr 25s linear infinite',
     },
   },
+
   plugins: [scrollbar],
 } satisfies Config

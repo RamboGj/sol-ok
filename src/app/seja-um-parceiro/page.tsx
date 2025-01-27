@@ -170,7 +170,7 @@ export default function BeAPartnerPage() {
       </main>
 
       <Image
-        className="block mt-20 mb-[106px]"
+        className="block mt-20 mb-[106px] mx-auto"
         src="/carrousel.png"
         alt="Carrousel of images"
         width={1990}
