@@ -16,7 +16,10 @@ import {
 } from './_components/PricingCard/PricingCard'
 import { Caption } from '@/components/@solumedi-ui/atoms/Caption/Caption'
 import { StepCard } from '@/components/molecules/StepCard/StepCard'
-import { Testimonials } from './_components/Testimonials/Testimonials'
+import {
+  TestimonialProps,
+  Testimonials,
+} from './_components/Testimonials/Testimonials'
 import { Link } from '@/components/@solumedi-ui/atoms/Link/Link'
 import { ArrowUpRightIcon } from '@/components/@icons/arrow-up-right'
 import { PostCard } from '@/components/molecules/PostCard/PostCard'
@@ -197,6 +200,27 @@ export default function HomePage() {
         'Tenha mais pacientes com a SoluMedi ampliando sua rede de atendimentos.',
       cta: 'Cadastre-se',
       bannerImageUrl: '/banner2.png',
+    },
+  ]
+
+  const testimonials: TestimonialProps[] = [
+    {
+      personTitle: 'Francisco',
+      testimonial:
+        '“Fiz a minha carteirinha e foi muito rápido, não paguei nada e gostei porque não tem mensalidade.”',
+      personImg: '/cases/francisco.png',
+    },
+    {
+      personTitle: 'Francisco',
+      testimonial:
+        '“Fiz a minha carteirinha e foi muito rápido, não paguei nada e gostei porque não tem mensalidade.”',
+      personImg: '/cases/francisco.png',
+    },
+    {
+      personTitle: 'Rebeca Silva',
+      testimonial:
+        '“Me ajudou muito pois em um momento super delicado consegui realizar um ultrassom obstétrico de forma rápida e com valor baixo.”',
+      personImg: '/cases/rebecca.png',
     },
   ]
 
@@ -413,7 +437,7 @@ export default function HomePage() {
         </ul>
       </section>
 
-      <Testimonials />
+      <Testimonials testimonials={testimonials} />
 
       <section className="py-[120px] mx-14" id="stayAware">
         <div className="w-full flex items-center justify-between">

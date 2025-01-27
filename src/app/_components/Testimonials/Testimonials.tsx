@@ -6,30 +6,20 @@ import { Heading } from '@/components/@solumedi-ui/atoms/Heading/Heading'
 import { IconButton } from '@/components/@solumedi-ui/atoms/IconButton/IconButton'
 import { Paragraph } from '@/components/@solumedi-ui/atoms/Paragraph/Paragraph'
 import Image from 'next/image'
-import { useEffect, useRef, useState } from 'react'
+import { ComponentProps, useEffect, useRef, useState } from 'react'
 
-export function Testimonials() {
-  const testimonials = [
-    {
-      customer: 'Francisco',
-      description:
-        '“Fiz a minha carteirinha e foi muito rápido, não paguei nada e gostei porque não tem mensalidade.”',
-      photo: '/cases/francisco.png',
-    },
-    {
-      customer: 'Francisco',
-      description:
-        '“Fiz a minha carteirinha e foi muito rápido, não paguei nada e gostei porque não tem mensalidade.”',
-      photo: '/cases/francisco.png',
-    },
-    {
-      customer: 'Rebeca Silva',
-      description:
-        '“Me ajudou muito pois em um momento super delicado consegui realizar um ultrassom obstétrico de forma rápida e com valor baixo.”',
-      photo: '/cases/rebecca.png',
-    },
-  ]
+export interface TestimonialProps {
+  testimonial: string
+  personImg: string
+  personTitle: string
+  personSubtitle?: string
+}
 
+export interface TestimonialsProps extends ComponentProps<'div'> {
+  testimonials: TestimonialProps[]
+}
+
+export function Testimonials({ testimonials }: TestimonialsProps) {
   const screenRef = useRef<HTMLDivElement>(null)
 
   const [position, setPosition] = useState({ x: 0, y: 0 })
@@ -89,30 +79,37 @@ export function Testimonials() {
         }}
         className="transition-transform duration-1000 gap-x-[177px] flex items-start px-12"
       >
-        {testimonials.map(({ customer, description, photo }, index) => {
-          return (
-            <li key={index}>
-              <div
-                data-in-view={activeIndex === index}
-                className="w-[892px] select-none scale-90 transition-all duration-300 data-[in-view=true]:opacity-100 data-[in-view=true]:scale-100 opacity-[24%]"
-              >
-                <Heading className="text-blue500" variant="h2">
-                  {description}
-                </Heading>
+        {testimonials.map(
+          ({ personTitle, testimonial, personImg, personSubtitle }, index) => {
+            return (
+              <li key={index}>
+                <div
+                  data-in-view={activeIndex === index}
+                  className="w-[892px] select-none scale-90 transition-all duration-300 data-[in-view=true]:opacity-100 data-[in-view=true]:scale-100 opacity-[24%]"
+                >
+                  <Heading className="text-blue500" variant="h2">
+                    {testimonial}
+                  </Heading>
 
-                <div className="flex items-end gap-x-6 mt-14">
-                  <Image
-                    width={120}
-                    height={120}
-                    src={photo}
-                    alt={`${customer} Photo.`}
-                  />
-                  <Paragraph size="md">{customer}</Paragraph>
+                  <div className="flex items-end gap-x-6 mt-14">
+                    <Image
+                      width={120}
+                      height={120}
+                      src={personImg}
+                      alt={`${personTitle} Photo.`}
+                    />
+                    <div>
+                      <Paragraph size="md">{personTitle}</Paragraph>
+                      <Paragraph className="text-blue500" size="md">
+                        {personSubtitle}
+                      </Paragraph>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </li>
-          )
-        })}
+              </li>
+            )
+          },
+        )}
       </ul>
 
       <div
