@@ -113,14 +113,23 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
       </ul>
 
       <div
-        className={`fixed pointer-events-none z-50 scale-0 ${isHovering ? 'block cursor-none' : 'hidden'}`}
+        className={`fixed pointer-events-none z-50 ${
+          isHovering ? 'cursor-none' : ''
+        }`}
         style={{
           left: `${position.x}px`,
           top: `${position.y}px`,
           transform: `translate(-50%, -50%) rotate(${cursorRotation}deg)`,
         }}
       >
-        <IconButton icon={<ArrowRightIcon />} />
+        <IconButton
+          className={` transition-all duration-500 ease-out w-[56px] h-[56px]  ${
+            isHovering
+              ? 'scale-100 opacity-100 cursor-none'
+              : 'scale-0 opacity-0'
+          }`}
+          icon={<ArrowRightIcon />}
+        />
       </div>
     </section>
   )

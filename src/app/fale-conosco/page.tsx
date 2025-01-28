@@ -125,7 +125,7 @@ export default function TalkWithUsPage() {
             <Button label="Procurar uma unidade" icon={<ArrowRightIcon />} />
           </div>
 
-          <div className="p-14 border border-blue100 rounded-[24px] flex flex-col gap-y-6">
+          <div className="p-14 border border-blue200 rounded-[24px] flex flex-col gap-y-6">
             <Heading variant="h3" className="text-blue500">
               Ouvidoria
             </Heading>
@@ -179,6 +179,7 @@ export default function TalkWithUsPage() {
           height={895}
           alt="Woman with a card in hands"
           src="/womanWithCard2.png"
+          className="sticky top-10"
         />
       </section>
 

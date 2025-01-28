@@ -121,8 +121,8 @@ export default {
       },
     },
     animation: {
-      scaleIn: 'scaleIn 200ms ease',
-      scaleOut: 'scaleOut 200ms ease',
+      scaleIn: 'scaleIn 100ms ease',
+      scaleOut: 'scaleOut 100ms ease',
       fadeIn: 'fadeIn 200ms ease',
       fadeOut: 'fadeOut 200ms ease',
       enterFromLeft: 'enterFromLeft 250ms ease',

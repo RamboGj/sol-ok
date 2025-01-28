@@ -26,7 +26,7 @@ export function PostCard({
         {...rest}
       >
         <div
-          className="w-full h-[244px] bg-cover bg-no-repeat"
+          className="w-full h-[244px] overflow-hidden bg-no-repeat group-hover:scale-105 transition-transform duration-500"
           style={{
             backgroundImage: `url(${imageHref})`,
           }}

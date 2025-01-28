@@ -118,14 +118,13 @@ export function Header() {
                     <ul className="flex flex-col">
                       {links.map(({ href, label }) => {
                         return (
-                          <Link
-                            className="w-full py-4 px-6 border-b border-blue100 whitespace-nowrap"
-                            label={label}
+                          <NextLink
+                            className="w-full py-4 px-6 text-blue500 font-manrope font-semibold leading-[150%] border-b border-blue100 whitespace-nowrap hover:bg-blue100 transition-colors duration-300"
                             key={label}
                             href={href}
-                            icon={null}
-                            size="sm"
-                          />
+                          >
+                            {label}
+                          </NextLink>
                         )
                       })}
                     </ul>

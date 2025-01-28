@@ -36,7 +36,7 @@ export default function UnitsPage() {
 
           <Input
             placeholder="Localização"
-            className="absolute top-8 left-8"
+            className="absolute top-8 left-8 w-fit"
             icon={<SearchIcon />}
           />
         </div>

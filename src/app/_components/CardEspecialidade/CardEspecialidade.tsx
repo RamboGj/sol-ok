@@ -12,7 +12,7 @@ export const cardEspecialidadeStyle = tv({
     wrapper:
       'group relative w-[230px] h-[408px] rounded-[40px] bg-cover p-8 overflow-hidden flex flex-col z-0',
     backgroundStyle:
-      'group-hover:scale-110 transition-transform duration-1000 bg-cover absolute inset-0',
+      'group-hover:scale-110 transition-transform duration-500 bg-cover absolute inset-0',
     backgroundGradient:
       'absolute top-0 inset-x-0 bg-gradient-to-b from-black/50 to-transparent h-[50%] z-10',
     buttonStyle: 'flex justify-end mt-auto z-20',
