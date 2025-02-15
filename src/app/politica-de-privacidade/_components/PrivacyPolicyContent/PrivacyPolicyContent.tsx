@@ -97,13 +97,15 @@ export function PrivacyPolicyContent() {
   ]
 
   return (
-    <main className="flex flex-col md:max-w-[768px] xl:max-w-[892px] mx-6 sm:mx-12 lg:mx-auto mt-[245px] xl:mt-[325px] mb-[120px]">
-      <Heading variant="h1">Política de Privacidade</Heading>
+    <main className="flex flex-col md:max-w-[672px] xl:max-w-[892px] px-6 md:px-0 md:mx-auto mt-20 md:mt-[245px] xl:mt-[325px] mb-[120px]">
+      <Heading className="md:whitespace-nowrap" variant="h1">
+        Política de Privacidade
+      </Heading>
       <Paragraph className="block mt-6 text-blue500" size="md">
         Última atualização em 17 Maio de 2022
       </Paragraph>
 
-      <section className="block mt-[120px]">
+      <section className="block mt-20 md:mt-[120px]">
         <Paragraph className="text-blue500" size="md">
           Nós, da SOLUMEDI FRANQUIAS E CONSULTORIA LTDA (SOLUMEDI), pessoa
           jurídica de direito privado, inscrita no CNPJ 28.187.612/0001-54, com

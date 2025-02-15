@@ -5,6 +5,7 @@ import NextLink from 'next/link'
 import { Link } from '@/components/@solumedi-ui/atoms/Link/Link'
 import { Paragraph } from '@/components/@solumedi-ui/atoms/Paragraph/Paragraph'
 import { ArrowDownIcon } from '@/components/@icons/arrow-down'
+import Image from 'next/image'
 
 export function Header() {
   const navigationLinks = [
@@ -76,11 +77,11 @@ export function Header() {
   ]
 
   return (
-    <header className="h-[104px] w-full flex items-center justify-between px-[56px]">
+    <header className="h-[104px] w-full flex items-center justify-between px-6 xl:px-[56px]">
       <NextLink href="/">
         <Logo />
       </NextLink>
-      <NavigationMenu.Root className="relative z-10 flex">
+      <NavigationMenu.Root className="relative z-10 hidden xl:flex">
         <NavigationMenu.List className="flex items-center gap-x-10">
           {navigationLinks.map(({ links, title, directLink }) => {
             if (directLink) {
@@ -135,6 +136,14 @@ export function Header() {
           })}
         </NavigationMenu.List>
       </NavigationMenu.Root>
+
+      <Image
+        width={24}
+        height={24}
+        src="/menu.png"
+        alt="Menu Icon"
+        className="xl:hidden"
+      />
     </header>
   )
 }
