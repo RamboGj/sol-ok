@@ -5,6 +5,7 @@ import { Button } from '@/components/@solumedi-ui/atoms/Button/Button'
 import { Caption } from '@/components/@solumedi-ui/atoms/Caption/Caption'
 import { Heading } from '@/components/@solumedi-ui/atoms/Heading/Heading'
 import { Paragraph } from '@/components/@solumedi-ui/atoms/Paragraph/Paragraph'
+import { useDeviceType } from '@/hooks/useDeviceType'
 import { ComponentProps } from 'react'
 import { tv, VariantProps } from 'tailwind-variants'
 
@@ -32,11 +33,12 @@ export interface PricingProps {
 export const pricingCardStyle = tv({
   slots: {
     wrapper:
-      'w-full flex flex-1 flex-col gap-y-8 relative py-20 px-14 border border-blue200 rounded-[20px]',
+      'w-full flex flex-1 flex-col gap-y-8 relative pt-14 pb-6 lg:py-20 px-6 lg:px-14 border border-blue200 rounded-[20px]',
     highligthWrapper:
       'py-2 px-4 bg-green100 rounded-full absolute top-4 right-4',
     highlightTextStyle: 'text-green400',
-    titleStyle: 'text-blue500',
+    titleStyle:
+      'text-[1.5rem] leading-[2rem] tracking-[-1%] lg:text-[2rem] lg:leading-[125%] lg:tracking-[-2%] text-blue500 whitespace-nowrap',
     subfeatureWrapper: 'flex flex-col gap-y-1',
     subfeatureItemWrapper: 'flex items-center gap-x-2',
     subfeatureIcon: 'text-blue400',
@@ -44,7 +46,9 @@ export const pricingCardStyle = tv({
     buttonStyle: 'w-full justify-center',
     featuresWrapper: 'flex gap-x-8',
     featureText: 'text-blue500',
-    priceText: 'text-blue400',
+    priceText:
+      'text-[3rem] leading-[3.5rem] tracking-[-2%] lg:text-[4rem] lg:leading-[100%] lg:tracking-[-2%] lg:text-blue400',
+    priceLabelText: 'lg:text-blue400',
   },
   variants: {
     best: {
@@ -78,6 +82,10 @@ export function PricingCard({
   highlightText = 'Mais procurado',
   ...rest
 }: PricingCardProps) {
+  const { isMobile } = useDeviceType()
+
+  console.log('isMobile ->', isMobile)
+
   const {
     wrapper,
     buttonStyle,
@@ -91,6 +99,7 @@ export function PricingCard({
     subfeatureWrapper,
     priceText,
     titleStyle,
+    priceLabelText,
   } = pricingCardStyle({ className, best })
 
   return (
@@ -110,7 +119,7 @@ export function PricingCard({
           {price}
         </Heading>
         {priceLabel && (
-          <Paragraph className={priceText()} size="md">
+          <Paragraph className={priceLabelText()} size="md">
             {priceLabel}
           </Paragraph>
         )}
@@ -120,10 +129,21 @@ export function PricingCard({
         <ul className={featuresWrapper()}>
           {features.map((feature, index) => (
             <li key={index}>
-              <Heading variant="h4" className={featureText()}>
+              <Heading
+                variant="h4"
+                className={featureText({
+                  className:
+                    'text-[1.125rem] lg:text-[1.5rem] lg:leading-[2rem] lg:tracking-[-1%]',
+                })}
+              >
                 {feature.price}
               </Heading>
-              <Paragraph className={featureText()} size="md">
+              <Paragraph
+                className={featureText({
+                  className: 'lg:text-[1.125rem] text-[1rem]',
+                })}
+                size="md"
+              >
                 {feature.priceLabel}
               </Paragraph>
             </li>
@@ -146,6 +166,7 @@ export function PricingCard({
 
       {cta && (
         <Button
+          size={isMobile ? 'sm' : 'md'}
           className={buttonStyle()}
           variant={best ? 'white' : 'blue'}
           label={cta}

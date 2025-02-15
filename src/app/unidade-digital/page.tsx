@@ -125,12 +125,12 @@ export default function DigitalUnityPage() {
   return (
     <div className="w-full overflow-x-hidden">
       <section
-        className="bg-[url('/womanWithCard.png')] bg-cover bg-center"
+        className="bg-[url('/womanWithCard.png')] bg-cover bg-center h-[400px] xl:h-[760px] 2xl:h-[904px]"
         id="hero"
       >
         <HeaderUnity />
 
-        <main className="py-[168px] ml-[210px]">
+        <main className="hidden xl:block py-24 2xl:py-[168px] ml-12 2xl:ml-[210px]">
           <div className="max-w-[436px]">
             <Heading variant="h1">
               Consultas médicas com valores reduzidos
@@ -149,19 +149,37 @@ export default function DigitalUnityPage() {
         </main>
       </section>
 
+      <section className="block xl:hidden px-12 mt-8">
+        <div className="w-full">
+          <Heading className="w-[60%]" variant="h2">
+            Consultas médicas com valores reduzidos
+          </Heading>
+
+          <Paragraph className="block mt-6 text-blue500">
+            Agende consultas particulares e exames nas melhores clínicas e
+            laboratórios com valores acessíveis.
+          </Paragraph>
+        </div>
+
+        <div className="flex mt-10 gap-x-4">
+          <Button label="Agendar pelo WhatsApp" icon={<ArrowRightIcon />} />
+          <Button label="Ligar para agendar" variant="light-blue" />
+        </div>
+      </section>
+
       <section
         className="w-full flex flex-col gap-y-20 items-center my-20"
         id="cards"
       >
         <Heading
-          className="max-w-[892px] w-full text-center text-blue500"
+          className="max-w-[554px] xl:max-w-[892px] w-full text-center text-blue500"
           variant="h2"
         >
           Economize com a SoluMedi para se consultar ou fazer exames
         </Heading>
 
-        <div className="grid grid-cols-4 grid-rows-2 mx-[56px] items-center gap-6">
-          <div className="bg-blue100 rounded-[48px] h-[268px] p-[56px] grid row-span-1 col-span-1">
+        <div className="grid grid-cols-2 lg:grid-cols-4 grid-rows-2 mx-[56px] items-center gap-6">
+          <div className="bg-blue100 rounded-[48px] h-[268px] p-8 2xl:p-[56px] order-1 grid row-span-1 col-span-1">
             <Heading
               className="w-full 2xl:w-[232px] block mt-auto"
               variant="h4"
@@ -170,11 +188,15 @@ export default function DigitalUnityPage() {
             </Heading>
           </div>
 
-          <div className="bg-neutral100 border border-blue200 h-full rounded-[48px]  p-[56px] grid row-span-2 col-span-1">
+          <div className="bg-neutral100 border border-blue200 h-full rounded-[48px] order-2 p-8 2xl:p-[56px] grid row-span-2 col-span-1">
             <div className="mt-auto flex flex-col">
               <Heading variant="h4">A partir de</Heading>
 
-              <Heading className="block mt-2" variant="h1">
+              <Heading className="2xl:block hidden mt-2" variant="h1">
+                R$ 7,00
+              </Heading>
+
+              <Heading className="2xl:hidden block mt-2" variant="h2">
                 R$ 7,00
               </Heading>
 
@@ -184,11 +206,11 @@ export default function DigitalUnityPage() {
             </div>
           </div>
 
-          <div className="bg-blue100 relative overflow-hidden rounded-[48px] p-[56px] grid h-full row-span-2 col-span-2">
+          <div className="bg-blue100 relative overflow-hidden rounded-[48px] h-[500px] lg:h-full p-8 2xl:p-[56px] order-4 lg:order-3 grid row-span-2 col-span-2">
             <Image
               alt="Cartão Solumedi"
               src={solumediCardImg}
-              className="absolute top-0 inset-x-0 w-full h-[400px]"
+              className="absolute top-0 inset-x-0 w-full h-[300px] lg::h-[255px] 2xl:h-[400px] object-cover"
             />
 
             <div className="mt-auto flex items-end justify-between">
@@ -196,30 +218,25 @@ export default function DigitalUnityPage() {
                 <Heading variant="h2">Cartão SoluMedi</Heading>
 
                 <Paragraph className="text-blue500 block mt-6" size="md">
-                  O melhor custo x benefício para manter sua saúde em dia.
+                  Gratuito, rapido e fácil de usar. Sem cobrança de mensalidade
+                  e anuidade. Você só paga quando precisa usar.
                 </Paragraph>
               </div>
-
-              <Button
-                label="Peça agora o seu"
-                variant="white"
-                icon={<ArrowRightIcon />}
-              />
             </div>
           </div>
 
-          <div className="bg-blue400 rounded-[48px] h-[268px] p-[56px] grid row-span-1 col-span-1">
+          <div className="bg-blue400 rounded-[48px] h-[268px] p-8 2xl:p-[56px] order-3 lg:order-4 grid row-span-1 col-span-1">
             <Heading
               className="w-full 2xl:w-[232px] block mt-auto text-neutral100"
               variant="h4"
             >
-              Cadastro fácil, rápido e totalmente gratuito.
+              Pague só quando usar, sem mensalidades.
             </Heading>
           </div>
         </div>
       </section>
 
-      <section className="py-20 mx-[210px] flex items-center justify-between">
+      <section className="py-20 mx-12 2xl:mx-[210px] flex flex-col-reverse gap-y-10 lg:flex-row items-center justify-between">
         <Image
           objectFit="cover"
           priority
@@ -227,9 +244,10 @@ export default function DigitalUnityPage() {
           height={640}
           src="/consultaAgendada.png"
           alt="Doctor looking at his cellphone."
+          className="w-[578px] h-[502px] 2xl:w-[738px] 2xl:h-[640px]"
         />
 
-        <div className="max-w-[584px] w-full flex flex-col gap-y-10">
+        <div className="max-w-[436px] xl:max-w-[479px] 2xl:max-w-[584px] w-full flex flex-col gap-y-10">
           <Heading variant="h2">
             Pague menos para ter acesso a saúde de qualidade
           </Heading>
@@ -249,22 +267,19 @@ export default function DigitalUnityPage() {
         </div>
       </section>
 
-      <section
-        id="plans"
-        className="flex flex-col items-center py-[120px] mx-[210px]"
-      >
+      <section id="plans" className="flex flex-col lg:items-center py-[120px]">
         <Heading
-          className="text-blue500 max-w-[586px] w-full text-center"
+          className="text-blue500 max-w-[586px] w-full text-center mx-auto px-12 2xl:mx-[210px]"
           variant="h2"
         >
           Compare valores da SoluMedi com o mercado
         </Heading>
 
-        <ul className="w-full grid grid-cols-3 gap-x-6 mt-20">
+        <ul className="w-full flex lg:grid lg:grid-cols-3 gap-x-6 mt-20 snap-x snap-mandatory overflow-x-scroll scrollbar-none px-12 2xl:mx-[210px]">
           {plans.map((plan, index) => {
             return (
-              <li key={index}>
-                <PricingCard {...plan} />
+              <li className="snap-center" key={index}>
+                <PricingCard className="min-w-[296px] lg:min-w-fit" {...plan} />
               </li>
             )
           })}
@@ -277,16 +292,25 @@ export default function DigitalUnityPage() {
       </section>
 
       <section
-        className="py-[120px] px-[56px] flex flex-col items-center bg-blue100"
+        className="py-[120px] px-0 lg:px-12 2xl:px-[56px] flex flex-col xl:items-center bg-blue100"
         id="steps"
       >
-        <Heading variant="h2">É rápido, fácil e você só paga se usar</Heading>
+        <Heading
+          className="text-[4rem] leading-[100%] text-center mx-12 lg:mx-0"
+          variant="h2"
+        >
+          É rápido, fácil e você só paga se usar
+        </Heading>
 
-        <ul className="grid grid-cols-4 gap-x-6 mt-20">
+        <ul className="flex xl:grid xl:grid-cols-4 gap-x-6 mt-20 overflow-x-scroll snap-x snap-mandatory px-12 lg:px-0 scrollbar-none">
           {steps.map(({ description, step }) => {
             return (
-              <li key={step}>
-                <StepCard description={description} step={step} />
+              <li className="snap-center" key={step}>
+                <StepCard
+                  className="min-w-[296px] lg:min-w-[276px] xl:min-w-min w-full"
+                  description={description}
+                  step={step}
+                />
               </li>
             )
           })}

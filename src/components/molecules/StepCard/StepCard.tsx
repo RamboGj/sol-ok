@@ -5,7 +5,8 @@ import { tv, VariantProps } from 'tailwind-variants'
 
 export const stepCardStyles = tv({
   slots: {
-    wrapper: 'p-[56px] rounded-[48px] bg-neutral100 flex flex-col gap-y-[56px]',
+    wrapper:
+      'p-8 2xl:p-[56px] rounded-[48px] bg-neutral100 flex flex-col gap-y-[56px]',
     title: 'text-blue200',
     descriptionStyle: 'text-blue500',
   },

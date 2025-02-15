@@ -7,7 +7,7 @@ export type FooterCopyrightProps = ComponentProps<'div'>
 export function FooterCopyright({ ...rest }: FooterCopyrightProps) {
   return (
     <section className="w-full" id="footerCopyright" {...rest}>
-      <div className="w-full flex justify-between items-start">
+      <div className="w-full flex flex-col xl:flex-row gap-y-6 justify-between items-start">
         <div className="flex flex-col">
           <Paragraph className="text-blue500" size="md">
             © SoluMedi, 2024
