@@ -38,7 +38,7 @@ export function ListLinkItem({
       <Paragraph
         className={labelStyle({
           className:
-            'group-hover:translate-y-[-100%] group-hover:opacity-0 transition-all duration-200',
+            'group-hover:translate-y-[-100%] group-hover:opacity-0 transition-all duration-200 truncate',
         })}
         size="md"
       >

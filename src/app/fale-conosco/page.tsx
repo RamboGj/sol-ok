@@ -89,13 +89,23 @@ export default function TalkWithUsPage() {
     <>
       <Header />
 
+      <div className='w-full h-[320px] md:h-[560px] bg-cover bg-center bg-[url("/womanWithCard3.png")] lg:hidden bg-no-repeat' />
+
       <section
-        className="mt-10 flex items-start justify-between mx-[210px]"
+        className="mt-10 flex items-start justify-between lg:px-8 xl:mx-[155px] 2xl:mx-[210px]"
         id="weAreHereToHelp"
       >
-        <aside className="max-w-[586px] block">
-          <div className="flex flex-col gap-y-10 pt-40 pb-[120px]">
-            <Heading variant="h1">Estamos aqui para te ajudar</Heading>
+        <aside className="w-full px-6 md:px-12 lg:px-0 lg:max-w-[374px] 2xl:max-w-[586px] block">
+          <div className="flex flex-col gap-y-10 pt-10 lg:pt-[120px] 2xl:pt-40 pb-[120px]">
+            <Heading className="hidden 2xl:block" variant="h1">
+              Estamos aqui para te ajudar
+            </Heading>
+            <Heading className="md:block hidden 2xl:hidden" variant="h2">
+              Estamos aqui para te ajudar
+            </Heading>
+            <Heading className="md:hidden" variant="h3">
+              Estamos aqui para te ajudar
+            </Heading>
             <Paragraph size="md" className="text-blue500">
               Precisa falar com a gente? É só escolher um de nossos meios de
               atendimento ao cliente que vamos ajudar você com todo suporte
@@ -117,15 +127,25 @@ export default function TalkWithUsPage() {
             </ul>
           </div>
 
-          <div className="my-10 p-14 bg-blue100 rounded-[24px] flex flex-col gap-y-10">
+          <div className="my-10 p-8 2xl:p-14 bg-blue100 rounded-[24px] flex flex-col gap-y-10">
             <Heading variant="h3" className="text-blue500">
               Encontre uma unidade próxima de você
             </Heading>
 
-            <Button label="Procurar uma unidade" icon={<ArrowRightIcon />} />
+            <Button
+              className="md:flex hidden w-full justify-between lg:w-fit"
+              label="Procurar uma unidade"
+              icon={<ArrowRightIcon />}
+            />
+            <Button
+              size="sm"
+              className="w-full justify-between md:hidden"
+              label="Procurar uma unidade"
+              icon={<ArrowRightIcon />}
+            />
           </div>
 
-          <div className="p-14 border border-blue200 rounded-[24px] flex flex-col gap-y-6">
+          <div className="px-8 py-14 2xl:p-14 border border-blue200 rounded-[24px] flex flex-col gap-y-6">
             <Heading variant="h3" className="text-blue500">
               Ouvidoria
             </Heading>
@@ -179,15 +199,18 @@ export default function TalkWithUsPage() {
           height={895}
           alt="Woman with a card in hands"
           src="/womanWithCard2.png"
-          className="sticky top-10"
+          className="hidden lg:block lg:sticky top-10 w-[474px] h-[536px] 2xl:w-[739px] 2xl:h-[895px]"
         />
       </section>
 
       <section
-        className="flex items-start justify-between mx-[210px] py-[200px]"
+        className="flex flex-col lg:flex-row items-start justify-between px-6 md:px-12 lg:mx-[155px] 2xl:mx-[210px] py-[200px]"
         id="frequentlyAskedQuestions"
       >
-        <Heading className="max-w-[434px] text-blue500" variant="h2">
+        <Heading
+          className="max-w-[434px] text-blue500 mb-10 lg:mb-0 block"
+          variant="h2"
+        >
           Dúvidas frequentes
         </Heading>
 
