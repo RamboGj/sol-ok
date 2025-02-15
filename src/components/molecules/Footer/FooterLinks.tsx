@@ -100,7 +100,7 @@ export function FooterLinks({ ...rest }: FooterLinksProps) {
 
   return (
     <section
-      className="w-full grid grid-cols-5 gap-x-6 items-start"
+      className="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-5 gap-y-20 gap-x-6 items-start"
       id="footerLinks"
       {...rest}
     >

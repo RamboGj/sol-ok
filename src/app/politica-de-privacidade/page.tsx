@@ -9,12 +9,12 @@ export default function PrivacyPolicyPage() {
 
       <PrivacyPolicyContent />
 
-      {/* <Footer.Root>
+      <Footer.Root>
         <Footer.Logo />
         <Footer.Links />
         <Footer.Social />
         <Footer.Copyright />
-      </Footer.Root> */}
+      </Footer.Root>
     </>
   )
 }
