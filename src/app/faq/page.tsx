@@ -112,17 +112,22 @@ export default function FAQPage() {
 
       <section
         id="faqSection"
-        className="max-w-[892px] mx-auto w-full mt-[120px]"
+        className="max-w-[892px] mx-auto w-full mt-20 md:mt-[120px] px-6 md:px-12 lg:px-0"
       >
         <div className="flex flex-col items-center gap-y-6">
-          <Heading variant="h1">Dúvidas frequentes</Heading>
+          <Heading className="hidden md:block" variant="h1">
+            Dúvidas frequentes
+          </Heading>
+          <Heading className="block md:hidden text-center" variant="h2">
+            Dúvidas frequentes
+          </Heading>
 
-          <Paragraph className="text-blue500" size="md">
+          <Paragraph className="text-blue500 text-center" size="md">
             Tudo o que você precisa saber, em um só lugar.
           </Paragraph>
         </div>
 
-        <div className="flex flex-col gap-y-[120px] mt-[120px] list-none">
+        <div className="flex flex-col gap-y-[120px] mt-20 md:mt-[120px] list-none">
           {sections.map(({ questions, title }) => {
             return (
               <section id={title} key={title}>
@@ -171,13 +176,23 @@ export default function FAQPage() {
         </div>
       </section>
 
-      <section className="mx-[210px] py-20" id="doubtsRemaining">
-        <div className="w-full bg-blue100 h-[224px] rounded-[24px] flex items-center justify-between px-20">
-          <Heading className="text-blue500" variant="h3">
+      <section
+        className="px-6 md:px-12 lg:px-0 lg:mx-[210px] py-20"
+        id="doubtsRemaining"
+      >
+        <div className="w-full bg-blue100 h-[224px] rounded-[24px] flex flex-col md:flex-row items-center gap-y-6 justify-center md:justify-between px-10 lg:px-20">
+          <Heading className="text-blue500 md:block hidden" variant="h3">
+            Ainda tem dúvidas?
+          </Heading>
+          <Heading className="text-blue500 md:hidden block" variant="h4">
             Ainda tem dúvidas?
           </Heading>
 
-          <Button label="Fale conosco" icon={<ArrowRightIcon />} />
+          <Button
+            label="Fale conosco"
+            className="w-full md:w-fit justify-between"
+            icon={<ArrowRightIcon />}
+          />
         </div>
       </section>
 

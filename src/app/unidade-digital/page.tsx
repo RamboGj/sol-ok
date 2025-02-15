@@ -342,7 +342,7 @@ export default function DigitalUnityPage() {
           É rápido, fácil e você só paga se usar
         </Heading>
 
-        <ul className="flex xl:grid xl:grid-cols-4 gap-x-6 mt-20 overflow-x-scroll snap-x snap-mandatory px-12 lg:px-0 scrollbar-none">
+        <ul className="flex xl:grid xl:grid-cols-4 gap-x-3 md:gap-x-6 mt-20 overflow-x-scroll snap-x snap-mandatory px-12 lg:px-0 scrollbar-none">
           {steps.map(({ description, step }) => {
             return (
               <li className="snap-center" key={step}>
