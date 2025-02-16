@@ -26,10 +26,6 @@ export interface PricingProps {
   }[]
 }
 
-;<div className="py-2 px-4 bg-green100 rounded-full absolute top-4 right-4">
-  <Caption className="text-green400">Mais procurado</Caption>
-</div>
-
 export const pricingCardStyle = tv({
   slots: {
     wrapper:
