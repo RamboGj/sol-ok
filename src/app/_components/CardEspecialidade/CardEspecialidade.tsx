@@ -50,7 +50,7 @@ export function CardEspecialidade({
   return (
     <NextLink
       className={
-        'group relative w-[230px] h-[408px] rounded-[40px] bg-cover p-8 overflow-hidden flex flex-col z-0'
+        'group relative w-[200px] h-[408px] rounded-[40px] bg-cover p-8 overflow-hidden flex flex-col z-0'
       }
       href={href}
     >

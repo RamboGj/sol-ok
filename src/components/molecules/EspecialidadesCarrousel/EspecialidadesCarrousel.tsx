@@ -121,49 +121,54 @@ export function EspecialidadesCarrousel({
   }, [])
 
   return (
-    <ul
-      style={{
-        transform: `translateX(-${209 * index}px)`,
-      }}
-      ref={carrouselRef}
-      className={cn(
-        'flex gap-x-6 ml-[210px] pr-[210px] relative transition-transform duration-500',
-        className,
-      )}
-      {...rest}
-    >
-      {especialidades.map(({ href, imageHref, title }) => {
-        return (
-          <li key={title}>
-            <CardEspecialidade
-              title={title}
-              href={href}
-              imageHref={imageHref}
-            />
-          </li>
-        )
-      })}
+    <div className="relative overflow-hidden">
+      <ul
+        ref={carrouselRef}
+        className={cn(
+          'flex gap-x-6 ml-14 2xl:ml-[210px] pr-14 2xl:pr-[210px] transition-transform duration-500',
+          className,
+        )}
+        style={{
+          transform: `translateX(-${(200 + 24) * index}px)`,
+        }}
+        {...rest}
+      >
+        {especialidades.map(({ href, imageHref, title }) => {
+          return (
+            <li key={title}>
+              <CardEspecialidade
+                title={title}
+                href={href}
+                imageHref={imageHref}
+              />
+            </li>
+          )
+        })}
+      </ul>
 
       {isAbleToGoNext && (
-        <li
-          role="button"
-          onClick={handleGoNext}
-          className="absolute w-[230px] group hover:cursor-pointer -right-[56px] h-[408px] bg-white/80 flex items-center justify-center"
-        >
-          <IconButton icon={<ArrowRightIcon />} />
-        </li>
+        <div className="absolute bottom-0 right-0">
+          <div
+            role="button"
+            onClick={handleGoNext}
+            className="w-[200px] group hover:cursor-pointer h-[408px] bg-white/80 flex items-center justify-center"
+          >
+            <IconButton icon={<ArrowRightIcon />} />
+          </div>
+        </div>
       )}
 
       {isAbleToGoBack && (
-        <li
-          role="button"
-          onClick={handleGoBack}
-          className="absolute w-[230px] group hover:cursor-pointer h-[408px] bg-white/80 flex items-center justify-center"
-        >
-          <IconButton icon={<ArrowLeftIcon />} />{' '}
-          {/* You'll need to import ArrowLeftIcon */}
-        </li>
+        <div className="absolute bottom-0 left-0">
+          <div
+            role="button"
+            onClick={handleGoBack}
+            className="w-[200px] group hover:cursor-pointer h-[408px] bg-white/80 flex items-center justify-center"
+          >
+            <IconButton icon={<ArrowLeftIcon />} />
+          </div>
+        </div>
       )}
-    </ul>
+    </div>
   )
 }

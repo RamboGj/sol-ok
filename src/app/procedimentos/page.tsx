@@ -140,7 +140,7 @@ export default function ProceduresPage() {
       <Header />
 
       <main className="w-full mt-[194px]">
-        <div className="flex justify-between items-end mx-[210px]">
+        <div className="flex justify-between items-end  mx-14 2xl:mx-[210px]">
           <div className="max-w-[586px]">
             <Heading variant="h1">
               Exames de imagem ou laboratoriais nas melhores clínicas
