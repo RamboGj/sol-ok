@@ -22,11 +22,11 @@ export function PostCard({
   return (
     <NextLink href={href}>
       <div
-        className="flex flex-col w-full h-[424px] 2xl:h-[460px] overflow-hidden rounded-[24px] border border-blue200 group"
+        className="flex flex-col w-[274px] 2xl:w-full h-[424px] 2xl:h-[460px] overflow-hidden rounded-[24px] border border-blue200 group"
         {...rest}
       >
         <div
-          className="w-full h-[244px] overflow-hidden bg-no-repeat group-hover:scale-105 transition-transform duration-500"
+          className="w-full h-[150px] 2xl:h-[244px] overflow-hidden bg-cover bg-no-repeat group-hover:scale-105 transition-transform duration-500"
           style={{
             backgroundImage: `url(${imageHref})`,
           }}
@@ -34,7 +34,7 @@ export function PostCard({
 
         <div className="p-10 pt-6 flex flex-col flex-grow">
           <Paragraph size="sm">{theme}</Paragraph>
-          <Paragraph size="md" className="text-blue500 block mt-2">
+          <Paragraph size="md" className="text-blue500 block mt-2 line-clamp-4">
             {title}
           </Paragraph>
 

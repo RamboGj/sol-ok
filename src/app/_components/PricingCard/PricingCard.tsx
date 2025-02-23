@@ -80,8 +80,6 @@ export function PricingCard({
 }: PricingCardProps) {
   const { isMobile } = useDeviceType()
 
-  console.log('isMobile ->', isMobile)
-
   const {
     wrapper,
     buttonStyle,

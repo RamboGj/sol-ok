@@ -1,3 +1,5 @@
+'use client'
+
 import { ArrowRightIcon } from '@/components/@icons/arrow-right'
 import { Button } from '@/components/@solumedi-ui/atoms/Button/Button'
 import { Heading } from '@/components/@solumedi-ui/atoms/Heading/Heading'
@@ -25,6 +27,7 @@ import { ArrowUpRightIcon } from '@/components/@icons/arrow-up-right'
 import { PostCard } from '@/components/molecules/PostCard/PostCard'
 import { Footer } from '@/components/molecules/Footer'
 import { Banner } from '@/components/molecules/Banner/Banner'
+import { useDeviceType } from '@/hooks/useDeviceType'
 
 export default function HomePage() {
   const especialidades = [
@@ -224,12 +227,19 @@ export default function HomePage() {
     },
   ]
 
+  const { isMobile } = useDeviceType()
+
+  console.log('isMobile =>', isMobile)
+
   return (
     <div className="w-full overflow-x-hidden">
-      <section className="bg-[url('/hero.png')] bg-cover bg-center" id="hero">
+      <section
+        className="bg-[url('/hero.png')] h-[240px] md:h-[400px] lg:h-[760px] 2xl:h-[904px] bg-cover bg-center"
+        id="hero"
+      >
         <Header />
 
-        <main className="max-w-[473px] w-full py-[168px] ml-[210px]">
+        <main className="hidden lg:block max-w-[473px] w-full py-[109px] 2xl:py-[168px] ml-16 2xl:ml-[210px]">
           <Heading variant="h1">
             Consultas médicas com valores reduzidos
           </Heading>
@@ -239,35 +249,68 @@ export default function HomePage() {
             laboratórios com valores acessíveis.
           </Paragraph>
 
-          <div className="flex mt-10 gap-x-4">
+          <div className="flex mt-10 gap-4">
             <Button label="Agendar agora" icon={<ArrowRightIcon />} />
-            <Button label="Procurar uma unidade" variant="white" />
+            <Button label="Procurar uma unidade" variant={'white'} />
           </div>
         </main>
       </section>
 
+      <main className="lg:hidden lg:max-w-[473px] w-full pt-8 px-6 md:px-12">
+        <Heading className="hidden md:block" variant="h2">
+          Consultas médicas com valores reduzidos
+        </Heading>
+        <Heading className="md:hdiden" variant="h3">
+          Consultas médicas com valores reduzidos
+        </Heading>
+
+        <Paragraph className="block mt-6 text-blue500">
+          Agende consultas particulares e exames nas melhores clínicas e
+          laboratórios com valores acessíveis.
+        </Paragraph>
+
+        <div className="w-full flex flex-col md:flex-row mt-10 gap-3">
+          <Button
+            className="w-full justify-between"
+            label="Agendar agora"
+            icon={<ArrowRightIcon />}
+          />
+          <Button
+            className="w-full text-center justify-center"
+            label="Procurar uma unidade"
+            variant={isMobile ? 'light-blue' : 'white'}
+          />
+        </div>
+      </main>
+
       <section
-        className="w-full flex flex-col gap-y-20 items-center my-20"
+        className="w-full flex flex-col gap-y-8 md:gap-y-20 items-center my-20 px-6 md:px-12 lg:px-14"
         id="cards"
       >
         <Heading
-          className="max-w-[892px] w-full text-center text-blue500"
+          className="max-w-[892px] w-full text-center text-blue500 hidden md:block"
           variant="h2"
         >
           Economize com a SoluMedi para se consultar ou fazer exames
         </Heading>
+        <Heading className="md:hidden text-center text-blue500" variant="h3">
+          Economize com a SoluMedi para se consultar ou fazer exames
+        </Heading>
 
-        <div className="grid grid-cols-4 grid-rows-2 mx-[56px] items-center gap-6">
-          <div className="bg-blue100 rounded-[48px] h-[268px] p-[56px] grid row-span-1 col-span-1">
+        <div className="grid grid-cols-2 lg:grid-cols-4 grid-rows-2 lg:mx-[56px] items-center gap-3 md:gap-6">
+          <div className="bg-blue100 rounded-[24px] md:rounded-[48px] h-[268px] p-6 md:p-12 lg:p-[56px] order-1 grid row-span-1 col-span-1">
             <Heading
-              className="w-full 2xl:w-[232px] block mt-auto"
+              className="w-full 2xl:w-[232px] md:block mt-auto hidden"
               variant="h4"
             >
               Cadastro fácil, rápido e totalmente gratuito.
             </Heading>
+            <Paragraph className="w-full block mt-auto md:hidden" size="sm">
+              Cadastro fácil, rápido e totalmente gratuito.
+            </Paragraph>
           </div>
 
-          <div className="bg-neutral100 border border-blue200 h-full rounded-[48px]  p-[56px] grid row-span-2 col-span-1">
+          <div className="bg-neutral100 border border-blue200 h-full rounded-[24px] md:rounded-[48px] order-2 p-6 md:p-12 lg:p-[56px] grid row-span-2 col-span-2 md:col-span-1">
             <div className="mt-auto flex flex-col">
               <Heading variant="h4">A partir de</Heading>
 
@@ -281,23 +324,40 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="bg-blue100 relative overflow-hidden rounded-[48px] p-[56px] grid h-full row-span-2 col-span-2">
+          <div className="bg-blue100 relative h-[560px] order-3 overflow-hidden rounded-[24px] md:rounded-[48px] p-6 md:p-12 lg:p-[56px] grid lg:h-full row-span-2 col-span-2">
             <Image
               alt="Cartão Solumedi"
               src={solumediCardImg}
-              className="absolute top-0 inset-x-0 w-full h-[400px]"
+              className="absolute top-0 inset-x-0 w-full h-[220px] md:h-[300px] lg:h-[260px] 2xl:h-[400px]"
             />
 
-            <div className="mt-auto flex items-end justify-between">
+            <div className="mt-auto flex flex-col 2xl:flex-row items-start 2xl:items-end justify-between">
               <div className="max-w-[400px] w-full">
-                <Heading variant="h2">Cartão SoluMedi</Heading>
+                <Heading className="hidden md:block" variant="h2">
+                  Cartão SoluMedi
+                </Heading>
+                <Heading className="md:hidden" variant="h3">
+                  Cartão SoluMedi
+                </Heading>
 
-                <Paragraph className="text-blue500 block mt-6" size="md">
-                  O melhor custo x benefício para manter sua saúde em dia.
+                <Paragraph
+                  className="text-blue500 mt-6 hidden md:block"
+                  size="md"
+                >
+                  Gratuito, rapido e fácil de usar. Sem cobrança de mensalidade
+                  e anuidade. Você só paga quando precisa usar.
+                </Paragraph>
+                <Paragraph
+                  className="text-blue500 block mt-4 md:hidden"
+                  size="sm"
+                >
+                  Gratuito, rapido e fácil de usar. Sem cobrança de mensalidade
+                  e anuidade. Você só paga quando precisa usar.
                 </Paragraph>
               </div>
 
               <Button
+                className="mt-6 2xl:mt-0"
                 label="Peça agora o seu"
                 variant="white"
                 icon={<ArrowRightIcon />}
@@ -305,22 +365,28 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="bg-blue400 rounded-[48px] h-[268px] p-[56px] grid row-span-1 col-span-1">
+          <div className="bg-blue400 rounded-[24px] md:rounded-[48px] h-[268px] p-6 md:p-12 lg:p-[56px] grid row-span-1 order-1 md:order-2 lg:order-3 col-span-1">
             <Heading
-              className="w-full 2xl:w-[232px] block mt-auto text-neutral100"
+              className="w-full 2xl:w-[232px] md:block mt-auto hidden text-neutral100"
               variant="h4"
             >
-              Cadastro fácil, rápido e totalmente gratuito.
+              Pague só quando usar, sem taxas mensais.
             </Heading>
+            <Paragraph
+              className="w-full block mt-auto md:hidden text-neutral100"
+              size="sm"
+            >
+              Pague só quando usar, sem taxas mensais.
+            </Paragraph>
           </div>
         </div>
       </section>
 
       <section
-        className="flex items-center  justify-between mx-[210px] mt-[160px] mb-[120px]"
+        className="flex flex-col lg:flex-row md:items-center justify-between 2xl:mx-[210px] mt-16 md:mt-20 lg:mt-[160px] mb-[120px]"
         id="especialidades"
       >
-        <div className="max-w-[434px] w-full">
+        <div className="lg:max-w-[434px] w-full  px-6 md:px-12 lg:px-14">
           <Heading className="text-blue500" variant="h2">
             Encontre a especialidade que você precisa
           </Heading>
@@ -330,15 +396,15 @@ export default function HomePage() {
             necessidades.
           </Paragraph>
 
-          <ul className="flex flex-col mt-14 gap-y-14">
-            <li>
+          <ul className="md:flex hidden flex-row lg:flex-col mt-14 gap-y-14 gap-6">
+            <li className="w-full">
               <Heading variant="h3">+ de 60</Heading>
               <Heading className="block ml-[28px] text-blue500" variant="h3">
                 especialidades
               </Heading>
             </li>
 
-            <li>
+            <li className="w-full">
               <Heading variant="h3">+ de 15 mil</Heading>
               <Heading className="block ml-[28px] text-blue500" variant="h3">
                 profissionais
@@ -347,8 +413,8 @@ export default function HomePage() {
           </ul>
         </div>
 
-        <div className="flex gap-6">
-          <div className="flex flex-col gap-6 mt-10">
+        <div className="flex gap-6 mt-8 md:mt-16 lg:mt-0 overflow-x-scroll px-6 md:px-12 lg:px-14">
+          <div className="flex flex-row md:flex-col gap-6 md:mt-10">
             <CardEspecialidade
               title={especialidades[0].title}
               href={especialidades[0].href}
@@ -361,7 +427,7 @@ export default function HomePage() {
             />
           </div>
 
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-row md:flex-col gap-6">
             <CardEspecialidade
               title={especialidades[2].title}
               href={especialidades[2].href}
@@ -373,7 +439,7 @@ export default function HomePage() {
               imageHref={especialidades[3].imageHref}
             />
           </div>
-          <div className="flex flex-col gap-6 mt-[120px]">
+          <div className="flex flex-row md:flex-col gap-6 md:mt-[120px]">
             <CardEspecialidade
               title={especialidades[4].title}
               href={especialidades[4].href}
@@ -382,7 +448,7 @@ export default function HomePage() {
 
             <NextLink
               href={'#'}
-              className="rounded-[40px] w-[230px] h-[240px] bg-blue100 p-8 group flex flex-col"
+              className="rounded-[40px] w-[200px] h-[240px] bg-blue100 p-8 group flex flex-col"
             >
               <Heading variant="h3">Ver todos</Heading>
               <div className="flex justify-end mt-auto">
@@ -395,43 +461,58 @@ export default function HomePage() {
 
       <section
         id="plans"
-        className="flex flex-col items-center py-[120px] mx-[210px]"
+        className="flex flex-col items-center py-16 md:py-20 lg:py-[120px] 2xl:mx-[210px]"
       >
         <Heading
-          className="text-blue500 max-w-[586px] w-full text-center"
+          className="text-blue500 hidden md:block px-6 md:px-12 lg:px-0 max-w-[586px] w-full text-center"
           variant="h2"
         >
           Compare valores da SoluMedi com o mercado
         </Heading>
 
-        <ul className="w-full grid grid-cols-3 gap-x-6 mt-20">
+        <Heading
+          className="md:hidden text-left text-blue500 px-6 md:px-12 lg:px-0 max-w-[586px] w-full"
+          variant="h3"
+        >
+          Compare valores da SoluMedi com o mercado
+        </Heading>
+
+        <ul className="w-full flex lg:grid lg:grid-cols-3 gap-x-6 mt-8 md:mt-20 snap-x snap-mandatory overflow-x-scroll scrollbar-none px-6 md:px-12 2xl:mx-[210px]">
           {plans.map((plan, index) => {
             return (
               <li key={index}>
-                <PricingCard {...plan} />
+                <PricingCard className="w-[296px] lg:w-full" {...plan} />
               </li>
             )
           })}
         </ul>
 
-        <Caption className="max-w-[520px] w-full text-center mt-10">
+        <Caption className="max-w-[520px] px-6 md:px-12 lg:px-16 text-left w-full md:text-center mt-10">
           Valores meramente ilustrativos com base nos preços praticados pelo
           mercado. A SoluMedi não garante valores de consultas e exames médicos.
         </Caption>
       </section>
 
       <section
-        className="py-[120px] px-[56px] flex flex-col items-center bg-blue100"
+        className="py-16 md:py-20 lg:py-[120px] flex flex-col xl:items-center bg-blue100"
         id="steps"
       >
-        <Heading variant="h2">É rápido, fácil e você só paga se usar</Heading>
+        <Heading
+          className="text-center md:px-12 lg:px-16 hidden md:block"
+          variant="h2"
+        >
+          É rápido, fácil e você só paga se usar
+        </Heading>
+        <Heading className="text-center px-6 md:hidden" variant="h3">
+          É rápido, fácil e você só paga se usar
+        </Heading>
 
-        <ul className="flex xl:grid xl:grid-cols-5 gap-x-3 md:gap-x-6 mt-10 md:mt-20 overflow-x-scroll snap-x snap-mandatory px-16 scrollbar-none">
+        <ul className="flex xl:grid xl:grid-cols-5 gap-x-3 md:gap-x-6 mt-10 md:mt-20 overflow-x-scroll snap-x snap-mandatory px-6 md:px-12 lg:px-16">
           {steps.map(({ description, step }) => {
             return (
               <li className="snap-center" key={step}>
                 <StepCard
-                  className="min-w-[296px] lg:min-w-[276px] xl:min-w-min w-full"
+                  className="w-[296px] lg:w-full"
                   description={description}
                   step={step}
                 />
@@ -443,9 +524,12 @@ export default function HomePage() {
 
       <Testimonials testimonials={testimonials} />
 
-      <section className="py-[120px] mx-14" id="stayAware">
-        <div className="w-full flex items-center justify-between">
-          <Heading variant="h2" className="text-blue500">
+      <section className="py-16 md:py-[120px]" id="stayAware">
+        <div className="w-full flex flex-col md:flex-row gap-y-2 md:gap-0 items-start lg:items-center justify-between  px-6 md:px-12 lg:px-14">
+          <Heading variant="h2" className="text-blue500 hidden md:block">
+            Fique por dentro
+          </Heading>
+          <Heading variant="h3" className="text-blue500 md:hidden">
             Fique por dentro
           </Heading>
 
@@ -456,7 +540,7 @@ export default function HomePage() {
           />
         </div>
 
-        <ul className="mt-20 grid grid-cols-4 items-stretch gap-x-6">
+        <ul className="mt-8 md:mt-20 flex overflow-x-scroll lg:grid lg:grid-cols-4 items-stretch gap-x-6  px-6 md:px-12 lg:px-14">
           {symptoms.map(({ href, imageHref, theme, title }) => {
             return (
               <li key={title}>
@@ -472,8 +556,11 @@ export default function HomePage() {
         </ul>
       </section>
 
-      <section id="banners" className="py-[120px] mx-14">
-        <ul className="grid grid-cols-2 gap-x-6">
+      <section
+        id="banners"
+        className="py-0 md:py-20 lg:py-[120px] mx-6 md:mx-12 lg:mx-14"
+      >
+        <ul className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {banners.map(({ bannerImageUrl, cta, description, title }) => {
             return (
               <li key={title}>
