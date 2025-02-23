@@ -426,11 +426,15 @@ export default function HomePage() {
       >
         <Heading variant="h2">É rápido, fácil e você só paga se usar</Heading>
 
-        <ul className="grid grid-cols-5 gap-x-6 mt-20">
+        <ul className="flex xl:grid xl:grid-cols-5 gap-x-3 md:gap-x-6 mt-10 md:mt-20 overflow-x-scroll snap-x snap-mandatory px-16 scrollbar-none">
           {steps.map(({ description, step }) => {
             return (
-              <li key={step}>
-                <StepCard description={description} step={step} />
+              <li className="snap-center" key={step}>
+                <StepCard
+                  className="min-w-[296px] lg:min-w-[276px] xl:min-w-min w-full"
+                  description={description}
+                  step={step}
+                />
               </li>
             )
           })}

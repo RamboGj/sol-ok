@@ -162,7 +162,10 @@ export default function FranquiaPage() {
         />
       </main>
 
-      <section className="py-[120px] mx-14 2xl:mx-[210px]" id="cards">
+      <section
+        className="py-16 md:py-20 lg:py-[120px] mx-6 md:mx-12 lg:mx-14 2xl:mx-[210px]"
+        id="cards"
+      >
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
           {bullets.map(({ headline, paragraph }) => {
             return (

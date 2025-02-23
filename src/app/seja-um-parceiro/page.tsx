@@ -18,6 +18,7 @@ import { CheckListItem } from '@/components/molecules/CheckListItem/CheckListIte
 import * as Accordion from '@radix-ui/react-accordion'
 import { IconButton } from '@/components/@solumedi-ui/atoms/IconButton/IconButton'
 import { DeleteIcon } from '@/components/@icons/delete'
+import { Caption } from '@/components/@solumedi-ui/atoms/Caption/Caption'
 
 export default function BeAPartnerPage() {
   const faqList = [
@@ -154,12 +155,20 @@ export default function BeAPartnerPage() {
     <div className="w-full overflow-x-hidden">
       <Header />
 
-      <main className="max-w-[888px] w-full mt-20 mx-auto flex flex-col items-center text-center gap-y-6">
+      <main className="px-6 md:px-12 lg:px-0 max-w-[888px] w-full mt-10 md:mt-20 mx-auto flex flex-col items-center text-center gap-y-6">
         <div className="w-fit px-4 py-2 rounded-[80px] outline outline-1 outline-blue200">
-          <Paragraph size="sm">Profissional da área da saúde</Paragraph>
+          <Paragraph className="hidden md:block" size="sm">
+            Profissional da área da saúde
+          </Paragraph>
+          <Caption className="md:hidden">Profissional da área da saúde</Caption>
         </div>
 
-        <Heading variant="h1">Aumente seu volume de atendimentos</Heading>
+        <Heading className="hidden md:block" variant="h1">
+          Aumente seu volume de atendimentos
+        </Heading>
+        <Heading className="md:hidden" variant="h3">
+          Aumente seu volume de atendimentos
+        </Heading>
 
         <Paragraph className="block text-blue500">
           Cresça sua receita com a SoluMedi. Facilidade e comodidade para sua
@@ -170,15 +179,25 @@ export default function BeAPartnerPage() {
       </main>
 
       <Image
-        className="block mt-20 mb-[106px] mx-auto"
+        className="hidden md:block mt-20 mb-[106px] 2xl:mx-auto"
         src="/carrousel.png"
         alt="Carrousel of images"
         width={1990}
         height={256}
       />
+      <Image
+        className="block md:hidden mt-20 mb-[106px] 2xl:mx-auto"
+        src="/carrousel2.png"
+        alt="Carrousel of images"
+        width={1990}
+        height={256}
+      />
 
-      <section className="py-[120px] mx-[210px]" id="cards">
-        <ul className="flex items-start justify-between">
+      <section
+        className="py-16 md:py-20 lg:py-[120px] mx-6 md:mx-12 lg:mx-14 2xl:mx-[210px]"
+        id="cards"
+      >
+        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10">
           {bullets.map(({ headline, paragraph }) => {
             return (
               <li key={paragraph}>
@@ -190,11 +209,16 @@ export default function BeAPartnerPage() {
       </section>
 
       <section
-        className="px-[210px] py-[120px] flex items-center justify-between bg-blue100"
+        className="px-6 md:px-12 lg:px-14 2xl:px-[210px] py-16 md:py-20 lg:py-[120px] flex flex-col md:flex-row items-center justify-between bg-blue100"
         id="saveYourTime"
       >
-        <div className="max-w-[584px] flex flex-col gap-y-10">
-          <Heading variant="h2">Economize seu tempo e da sua equipe</Heading>
+        <div className="max-w-[324px] lg:max-w-[473px] 2xl:max-w-[584px] flex flex-col gap-y-10">
+          <Heading className="hidden lg:block" variant="h2">
+            Economize seu tempo e da sua equipe
+          </Heading>
+          <Heading className="lg:hidden" variant="h3">
+            Economize seu tempo e da sua equipe
+          </Heading>
 
           <ul className="flex flex-col gap-y-6">
             {timeFeatures.map((feature) => {
@@ -207,6 +231,7 @@ export default function BeAPartnerPage() {
           </ul>
         </div>
         <Image
+          className="mt-10 md:mt-0 w-[320px] lg:w-[572px] 2xl:w-[738px]"
           width={738}
           height={704}
           src={'/doctor_chart.png'}
@@ -215,12 +240,16 @@ export default function BeAPartnerPage() {
       </section>
 
       <section
-        className="px-[210px] py-[120px] flex items-center flex-row-reverse justify-between bg-blue100"
+        className="px-6 md:px-12 lg:px-14 2xl:px-[210px] py-16 md:py-20 lg:py-[120px] flex flex-col md:flex-row-reverse items-center justify-between bg-blue100"
         id="yourCustomersSatisfied"
       >
-        <div className="max-w-[584px] flex flex-col gap-y-10">
-          <Heading variant="h2">Economize seu tempo e da sua equipe</Heading>
-
+        <div className="max-w-[324px] lg:max-w-[473px] 2xl:max-w-[584px] flex flex-col gap-y-10">
+          <Heading className="hidden lg:block" variant="h2">
+            Seus clientes mais satisfeitos
+          </Heading>
+          <Heading className="lg:hidden" variant="h3">
+            Seus clientes mais satisfeitos
+          </Heading>
           <ul className="flex flex-col gap-y-6">
             {customerFeatures.map((feature) => {
               return (
@@ -236,20 +265,35 @@ export default function BeAPartnerPage() {
           height={704}
           src={'/woman_card_message.png'}
           alt="A woman with solumedi card in hands with some pop ups above her picture."
+          className="mt-10 md:mt-0 w-[320px] lg:w-[572px] 2xl:w-[738px]"
         />
       </section>
 
       <section
-        className="py-[120px] px-[56px] flex flex-col items-center bg-blue100"
+        className="py-16 md:py-20 lg:py-[120px] flex flex-col xl:items-center bg-blue100"
         id="steps"
       >
-        <Heading variant="h2">Facilidade para você e seus pacientes</Heading>
-
-        <ul className="grid grid-cols-5 gap-x-6 mt-20">
+        <Heading
+          className="px-6 md:px-12 lg:px-14 text-center hidden md:block"
+          variant="h2"
+        >
+          Facilidade para você e seus pacientes
+        </Heading>
+        <Heading
+          className="px-6 md:px-12 lg:px-14 text-center md:hidden"
+          variant="h3"
+        >
+          Facilidade para você e seus pacientes
+        </Heading>
+        <ul className="flex xl:grid xl:grid-cols-5 gap-x-3 md:gap-x-6 mt-10 md:mt-20 overflow-x-scroll snap-x snap-mandatory px-6 md:px-12 lg:px-14 scrollbar-none">
           {steps.map(({ description, step }) => {
             return (
-              <li key={step}>
-                <StepCard description={description} step={step} />
+              <li className="snap-center" key={step}>
+                <StepCard
+                  className="min-w-[214px] lg:w-full"
+                  description={description}
+                  step={step}
+                />
               </li>
             )
           })}
@@ -259,14 +303,14 @@ export default function BeAPartnerPage() {
       <Testimonials testimonials={testimonials} />
 
       <section
-        className="py-[120px] mx-auto max-w-[1257px] flex flex-col items-center gap-y-10"
+        className="py-16 md:py-20 lg:py-[120px] px-12 md:px-14  mx-auto flex flex-col items-center gap-y-10"
         id="otherPartners"
       >
-        <Heading className="text-blue500" variant="h4">
+        <Heading className="text-blue500 text-center" variant="h4">
           Alguns parceiros que trabalham com a gente
         </Heading>
 
-        <ul className="flex items-center gap-x-20">
+        <ul className="flex flex-wrap items-center justify-center gap-10 lg:gap-20">
           {otherPartners.map(({ alt, height, imageHref, width }) => {
             return (
               <li key={alt}>
@@ -283,13 +327,16 @@ export default function BeAPartnerPage() {
       </section>
 
       <section
-        className='bg-cover bg-[url("/womanDoctor.png")] h-[752px] flex items-center justify-center'
+        className='bg-cover bg-[url("/womanDoctor.png")] bg-center h-[432px] md:h-[632px] lg:h-[752px] flex items-center justify-center'
         id="earnMoreWithSolumedi"
       >
-        <div className="max-w-[888px] flex flex-col gap-y-20">
-          <strong className="text-neutral100 text-[6.5rem] leading-[6rem] tracking-[-2%] font-manrope font-semibold">
+        <div className="px-6 md:px-12 lg:px-0 max-w-[888px] flex flex-col gap-y-10 lg:gap-y-20">
+          <strong className="hidden md:block text-neutral100 text-[6.5rem] leading-[6rem] tracking-[-2%] font-manrope font-semibold">
             Venha ganhar mais com a SoluMedi
           </strong>
+          <Heading className="md:hidden text-neutral100" variant="h2">
+            Venha ganhar mais com a SoluMedi
+          </Heading>
 
           <Button
             variant="white"
@@ -300,10 +347,13 @@ export default function BeAPartnerPage() {
       </section>
 
       <section
-        className="flex flex-col gap-y-16 max-w-[892px] mx-auto py-[120px]"
+        className="flex flex-col px-6 md:px-12 lg:px-14 gap-y-10 md:gap-y-16 max-w-[892px] mx-auto py-16 md:py-20 lg:py-[120px]"
         id="mainReferrals"
       >
-        <Heading className="text-blue500" variant="h2">
+        <Heading className="text-blue500 md:block hidden" variant="h2">
+          Ficou com alguma dúvida? Vamos te ajudar
+        </Heading>
+        <Heading className="text-blue500 md:hidden" variant="h3">
           Ficou com alguma dúvida? Vamos te ajudar
         </Heading>
 

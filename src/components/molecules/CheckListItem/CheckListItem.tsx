@@ -10,7 +10,7 @@ export interface CheckListItemProps extends ComponentProps<'div'> {
 export const checkListItemStyle = tv({
   slots: {
     wrapper: 'flex items-center gap-x-5',
-    icon: 'text-blue400',
+    icon: 'text-blue400 flex shrink-0',
     paragraph: 'text-blue500',
   },
 })
