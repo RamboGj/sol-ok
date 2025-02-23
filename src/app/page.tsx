@@ -229,8 +229,6 @@ export default function HomePage() {
 
   const { isMobile } = useDeviceType()
 
-  console.log('isMobile =>', isMobile)
-
   return (
     <div className="w-full overflow-x-hidden">
       <section

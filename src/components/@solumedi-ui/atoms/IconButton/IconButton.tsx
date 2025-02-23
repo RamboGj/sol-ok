@@ -30,11 +30,20 @@ export interface IconButtonProps
   icon: ReactNode
 }
 
-export function IconButton({ className, variant, icon }: IconButtonProps) {
+export function IconButton({
+  className,
+  variant,
+  icon,
+  ...rest
+}: IconButtonProps) {
   const { wrapper } = iconButtonStyle({
     className,
     variant,
   })
 
-  return <button className={wrapper({ className })}>{icon}</button>
+  return (
+    <button className={wrapper({ className })} {...rest}>
+      {icon}
+    </button>
+  )
 }

@@ -6,8 +6,12 @@ import { Link } from '@/components/@solumedi-ui/atoms/Link/Link'
 import { Paragraph } from '@/components/@solumedi-ui/atoms/Paragraph/Paragraph'
 import { ArrowDownIcon } from '@/components/@icons/arrow-down'
 import Image from 'next/image'
+import { useState } from 'react'
+import { BookExamModal } from '../BookExamModal/BookExamModal'
 
 export function Header() {
+  const [modalOpen, setModalOpen] = useState<boolean>(false)
+
   const navigationLinks = [
     {
       title: 'Para pacientes',
@@ -138,11 +142,20 @@ export function Header() {
       </NavigationMenu.Root>
 
       <Image
+        role="button"
+        aria-label="Open menu"
+        onClick={() => setModalOpen(true)}
         width={24}
         height={24}
         src="/menu.png"
         alt="Menu Icon"
         className="xl:hidden"
+      />
+
+      <BookExamModal
+        onClose={() => setModalOpen(false)}
+        open={modalOpen}
+        onOpenChange={setModalOpen}
       />
     </header>
   )
