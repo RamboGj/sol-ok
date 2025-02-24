@@ -45,9 +45,9 @@ export interface InputDropdownProps extends ComponentProps<'input'> {
   }[]
 }
 
-function sanitizeSearch(val: string) {
-  return val.toLowerCase().trim()
-}
+// function sanitizeSearch(val: string) {
+//   return val.toLowerCase().trim()
+// }
 
 export function InputDropdown({
   label,
@@ -89,9 +89,9 @@ export function InputDropdown({
     setOpen(false)
   }
 
-  const filteredOptions =
-    options.filter((opt) => sanitizeSearch(opt.label).includes(value.label)) ||
-    []
+  // const filteredOptions =
+  //   options.filter((opt) => sanitizeSearch(opt.label).includes(value.label)) ||
+  //   []
 
   return (
     <div className={wrapper({ className })}>
@@ -144,7 +144,7 @@ export function InputDropdown({
             className="rounded-[32px] max-h-[296px] h-fit z-50 py-2  drop-shadow-[0_4px_40px_#2A4F7237] bg-neutral100 data-[state=closed]:animate-scaleOut data-[state=open]:animate-scaleIn"
           >
             <div className="flex flex-col  max-h-[296px] h-fit  scrollbar-thin scrollbar-thumb-blue200 scrollbar-track-transparent overflow-y-scroll ">
-              {filteredOptions.map(({ label, value, action }, index) => {
+              {options.map(({ label, value, action }, index) => {
                 return (
                   <div
                     className="px-6 py-4 flex items-center gap-x-4 hover:bg-neutral200 transition-colors duration-300"
