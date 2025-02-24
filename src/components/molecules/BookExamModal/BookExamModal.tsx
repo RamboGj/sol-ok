@@ -4,11 +4,35 @@ import { Heading } from '@/components/@solumedi-ui/atoms/Heading/Heading'
 import { IconButton } from '@/components/@solumedi-ui/atoms/IconButton/IconButton'
 import { Paragraph } from '@/components/@solumedi-ui/atoms/Paragraph/Paragraph'
 import { Switch } from '@/components/@solumedi-ui/atoms/Switch/Switch'
-import { Input } from '@/components/@solumedi-ui/molecules/Input/Input'
+import { InputDropdown } from '@/components/@solumedi-ui/molecules/InputDropdown/InputDropdown'
 import { Modal, ModalProps } from '@/components/atoms/Modal/Modal'
 import * as Dialog from '@radix-ui/react-dialog'
 
 export function BookExamModal({ open, onClose, ...rest }: ModalProps) {
+  const options = [
+    {
+      label: 'Usar minha localização',
+      value: 'usar_minha_localizacao',
+      action: () => {},
+    },
+    {
+      label: 'Curitiba',
+      value: 'curitiba',
+    },
+    {
+      label: 'Blumenau',
+      value: 'blumenau',
+    },
+    {
+      label: 'Florianópolis',
+      value: 'florianopolis',
+    },
+    {
+      label: 'Chapecó',
+      value: 'chapeco',
+    },
+  ]
+
   return (
     <Modal open={open} {...rest}>
       <IconButton
@@ -24,8 +48,12 @@ export function BookExamModal({ open, onClose, ...rest }: ModalProps) {
 
       <form className="flex flex-col">
         <div className="flex flex-col gap-y-2 mt-8">
-          <Input icon={null} placeholder="Cidade" />
-          <Input icon={null} placeholder="Especialidade ou exame" />
+          <InputDropdown options={options} icon={null} placeholder="Cidade" />
+          <InputDropdown
+            options={options}
+            icon={null}
+            placeholder="Especialidade ou exame"
+          />
 
           <div className="flex items-center gap-x-3 mt-2 lg:mt-0">
             <Switch />

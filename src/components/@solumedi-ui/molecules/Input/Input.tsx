@@ -8,12 +8,12 @@ export const inputStyle = tv({
   slots: {
     wrapper: 'w-full flex flex-col gap-y-2 items-start group',
     fieldWrapper:
-      'w-full flex items-center bg-neutral100 gap-x-4 px-6 rounded-[80px] h-[64px] ring-1 ring-blue200 group-hover:ring-blue400 group-focus-within:ring-blue400 group-focus-within:ring-2 transition-shadow duration-500',
+      'w-full flex items-center bg-neutral100 px-6 rounded-[80px] h-[64px] ring-1 ring-blue200 group-hover:ring-blue400 group-focus-within:ring-blue400 group-focus-within:ring-2 transition-shadow duration-500',
     fieldStyle:
       'flex-1 focus:outline-none text-blue500 font-semibold placeholder:text-blue400 placeholder:font-semibold font-manrope',
     labelStyle: 'text-blue400',
     hintStyle: 'text-blue500 opacity-60',
-    iconStyle: 'text-blue400',
+    iconStyle: 'text-blue400 block mr-4',
   },
   variants: {
     error: {
