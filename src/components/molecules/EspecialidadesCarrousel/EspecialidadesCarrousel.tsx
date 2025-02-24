@@ -13,10 +13,13 @@ export function EspecialidadesCarrousel({
   className,
   ...rest
 }: EspecialidadesCarrouselProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
   const carrouselRef = useRef<HTMLUListElement>(null)
-
   const [index, setIndex] = useState(0)
-  const [isAbleToGoNext, setIsAbleToGoNext] = useState(false)
+  const [visibleCardsCount, setVisibleCardsCount] = useState(3)
+  const [maxIndex, setMaxIndex] = useState(0)
+  const [canNavigate, setCanNavigate] = useState({ prev: false, next: false })
+  const [isMobile, setIsMobile] = useState(false)
 
   const especialidades = [
     {
@@ -56,118 +59,131 @@ export function EspecialidadesCarrousel({
     },
   ]
 
-  function handleGoNext() {
-    if (!carrouselRef.current) return
+  const CARD_WIDTH = 209
+  const CARD_GAP = 24
+  const MD_BREAKPOINT = 768
 
-    // Calculate new scroll position
-    const cardWidth = 209
-    const newScrollPosition = index * cardWidth + cardWidth
-
-    carrouselRef.current.scrollTo({
-      left: newScrollPosition,
-      behavior: 'smooth',
-    })
-
-    setIndex((prevIndex) => prevIndex + 1)
+  const handleGoNext = () => {
+    if (carrouselRef.current && index < maxIndex && !isMobile) {
+      setIndex((prev) => prev + 1)
+    }
   }
 
-  function handleGoBack() {
-    if (!carrouselRef.current || index === 0) return
-
-    // Calculate new scroll position
-    const cardWidth = 209
-    const newScrollPosition = (index - 1) * cardWidth
-
-    carrouselRef.current.scrollTo({
-      left: newScrollPosition,
-      behavior: 'smooth',
-    })
-
-    setIndex((prevIndex) => prevIndex - 1)
-    setIsAbleToGoNext(true)
+  const handleGoBack = () => {
+    if (carrouselRef.current && index > 0 && !isMobile) {
+      setIndex((prev) => prev - 1)
+    }
   }
 
-  const isAbleToGoBack = index > 0
+  const getContainerWidth = () => {
+    if (!containerRef.current) return 0
+    return containerRef.current.clientWidth > 1536
+      ? containerRef.current.clientWidth - 120
+      : containerRef.current.clientWidth
+  }
 
-  useEffect(() => {
-    if (carrouselRef.current) {
-      const maxIndex = Math.ceil(
-        (carrouselRef.current.scrollWidth + 209 - window.innerWidth) / 209,
+  const updateCarouselState = () => {
+    if (!containerRef.current || !carrouselRef.current) return
+
+    const isMobileView = window.innerWidth < MD_BREAKPOINT
+    setIsMobile(isMobileView)
+
+    if (isMobileView) {
+      setVisibleCardsCount(especialidades.length)
+      setMaxIndex(0)
+      setCanNavigate({ prev: false, next: false })
+    } else {
+      const containerWidth = getContainerWidth()
+      const visibleWidth = containerWidth - 2 * 210
+      const cardTotalWidth = CARD_WIDTH + CARD_GAP
+      const newVisibleCardsCount = Math.floor(visibleWidth / cardTotalWidth)
+      const newMaxIndex = Math.max(
+        0,
+        especialidades.length - newVisibleCardsCount,
       )
 
-      if (index + 1 > maxIndex) {
-        setIsAbleToGoNext(false)
-      }
+      setVisibleCardsCount(newVisibleCardsCount)
+      setMaxIndex(newMaxIndex)
+      setIndex((prev) => Math.min(prev, newMaxIndex))
+      setCanNavigate({
+        prev: index > 0,
+        next: index + 2 < newMaxIndex,
+      })
     }
-  }, [index])
+  }
 
   useEffect(() => {
-    const checkCarouselNavigation = () => {
-      if (carrouselRef.current) {
-        const canGoNext =
-          carrouselRef.current.scrollWidth + 209 > window.innerWidth
+    updateCarouselState()
+    window.addEventListener('resize', updateCarouselState)
+    return () => window.removeEventListener('resize', updateCarouselState)
+  }, [index])
 
-        setIsAbleToGoNext(canGoNext)
-      }
-    }
+  const getCarouselStyle = () => {
+    if (isMobile) return undefined
+    const offset = -(index * (CARD_WIDTH + CARD_GAP))
+    return { transform: `translateX(${offset}px)` }
+  }
 
-    // Check on mount and add resize listener
-    checkCarouselNavigation()
-    window.addEventListener('resize', checkCarouselNavigation)
-
-    return () => {
-      window.removeEventListener('resize', checkCarouselNavigation)
-    }
-  }, [])
+  const shouldShowOverlay = (cardIndex: number) => {
+    if (isMobile) return false
+    const firstVisibleIndex = index
+    const lastVisibleIndex = index + visibleCardsCount - 1
+    return (
+      cardIndex === firstVisibleIndex - 1 || cardIndex === lastVisibleIndex + 3
+    )
+  }
 
   return (
-    <div className="relative overflow-hidden">
-      <ul
-        ref={carrouselRef}
-        className={cn(
-          'flex gap-x-6 ml-14 2xl:ml-[210px] pr-14 2xl:pr-[210px] transition-transform duration-500',
-          className,
-        )}
-        style={{
-          transform: `translateX(-${(200 + 24) * index}px)`,
-        }}
-        {...rest}
+    <div ref={containerRef} className="relative overflow-hidden">
+      <div
+        className={cn('relative', isMobile ? 'px-4' : 'px-14 2xl:px-[210px]')}
       >
-        {especialidades.map(({ href, imageHref, title }) => {
-          return (
-            <li key={title}>
+        <ul
+          ref={carrouselRef}
+          className={cn(
+            'flex gap-x-6',
+            isMobile
+              ? 'overflow-x-auto snap-x snap-mandatory scrollbar-hide'
+              : 'transition-transform overflow-x-hidden scrollbar-none duration-500 ease-out',
+            className,
+          )}
+          style={getCarouselStyle()}
+          {...rest}
+        >
+          {especialidades.map(({ href, imageHref, title }, cardIndex) => (
+            <li
+              key={title}
+              className={cn('relative flex-shrink-0', isMobile && 'snap-start')}
+            >
               <CardEspecialidade
                 title={title}
                 href={href}
                 imageHref={imageHref}
               />
+              {shouldShowOverlay(cardIndex) && (
+                <div className="absolute inset-0 bg-white/80" />
+              )}
             </li>
-          )
-        })}
-      </ul>
+          ))}
+        </ul>
+      </div>
 
-      {isAbleToGoNext && (
-        <div className="absolute bottom-0 right-0">
-          <div
-            role="button"
-            onClick={handleGoNext}
-            className="w-[200px] group hover:cursor-pointer h-[408px] bg-white/80 flex items-center justify-center"
-          >
-            <IconButton icon={<ArrowRightIcon />} />
-          </div>
-        </div>
+      {!isMobile && canNavigate.next && (
+        <button
+          onClick={handleGoNext}
+          className="absolute right-0 top-0 h-full w-[210px] flex items-center justify-center"
+        >
+          <IconButton icon={<ArrowRightIcon />} />
+        </button>
       )}
 
-      {isAbleToGoBack && (
-        <div className="absolute bottom-0 left-0">
-          <div
-            role="button"
-            onClick={handleGoBack}
-            className="w-[200px] group hover:cursor-pointer h-[408px] bg-white/80 flex items-center justify-center"
-          >
-            <IconButton icon={<ArrowLeftIcon />} />
-          </div>
-        </div>
+      {!isMobile && canNavigate.prev && (
+        <button
+          onClick={handleGoBack}
+          className="absolute left-0 top-0 h-full w-[210px] flex items-center justify-center"
+        >
+          <IconButton icon={<ArrowLeftIcon />} />
+        </button>
       )}
     </div>
   )

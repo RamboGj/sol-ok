@@ -411,7 +411,7 @@ export default function HomePage() {
           </ul>
         </div>
 
-        <div className="flex gap-6 mt-8 md:mt-16 lg:mt-0 overflow-x-scroll px-6 md:px-12 lg:px-14">
+        <div className="flex gap-6 mt-8 md:mt-16 lg:mt-0 sm:overflow-x-hidden overflow-x-scroll px-6 md:px-12 lg:px-14">
           <div className="flex flex-row md:flex-col gap-6 md:mt-10">
             <CardEspecialidade
               title={especialidades[0].title}
@@ -505,7 +505,7 @@ export default function HomePage() {
           É rápido, fácil e você só paga se usar
         </Heading>
 
-        <ul className="flex xl:grid xl:grid-cols-5 gap-x-3 md:gap-x-6 mt-10 md:mt-20 overflow-x-scroll snap-x snap-mandatory px-6 md:px-12 lg:px-16">
+        <ul className="flex xl:grid xl:grid-cols-5 gap-x-3 md:gap-x-6 mt-10 md:mt-20 lg:overflow-x-hidden overflow-x-scroll snap-x snap-mandatory px-6 md:px-12 lg:px-16">
           {steps.map(({ description, step }) => {
             return (
               <li className="snap-center" key={step}>
@@ -538,7 +538,7 @@ export default function HomePage() {
           />
         </div>
 
-        <ul className="mt-8 md:mt-20 flex overflow-x-scroll lg:grid lg:grid-cols-4 items-stretch gap-x-6  px-6 md:px-12 lg:px-14">
+        <ul className="mt-8 md:mt-20 flex overflow-x-scroll 2xl:overflow-x-hidden lg:grid lg:grid-cols-4 items-stretch gap-x-6  px-6 md:px-12 lg:px-14">
           {symptoms.map(({ href, imageHref, theme, title }) => {
             return (
               <li key={title}>

@@ -34,7 +34,7 @@ export const pricingCardStyle = tv({
       'py-2 px-4 bg-green100 rounded-full absolute top-4 right-4',
     highlightTextStyle: 'text-green400',
     titleStyle:
-      'text-[1.5rem] leading-[2rem] tracking-[-1%] lg:text-[2rem] lg:leading-[125%] lg:tracking-[-2%] text-blue500 whitespace-nowrap',
+      'text-[1.5rem] leading-[2rem] tracking-[-1%] lg:text-[2rem] lg:leading-[125%] lg:tracking-[-2%] text-blue500',
     subfeatureWrapper: 'flex flex-col gap-y-1',
     subfeatureItemWrapper: 'flex items-center gap-x-2',
     subfeatureIcon: 'text-blue400',

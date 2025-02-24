@@ -1,14 +1,25 @@
+'use client'
+
 import { CardEspecialidade } from '@/app/_components/CardEspecialidade/CardEspecialidade'
 import { ArrowLeftIcon } from '@/components/@icons/arrow-left'
 import { ArrowRightIcon } from '@/components/@icons/arrow-right'
 import { IconButton } from '@/components/@solumedi-ui/atoms/IconButton/IconButton'
-import { useEffect, useRef, useState } from 'react'
+import { cn } from '@/lib/utils'
+import { ComponentProps, useEffect, useRef, useState } from 'react'
 
-export function ProceduresCarrousel() {
+export type ProceduresCarrouselProps = ComponentProps<'ul'>
+
+export function ProceduresCarrousel({
+  className,
+  ...rest
+}: ProceduresCarrouselProps) {
+  const containerRef = useRef<HTMLDivElement>(null)
   const carrouselRef = useRef<HTMLUListElement>(null)
-
   const [index, setIndex] = useState(0)
-  const [isAbleToGoNext, setIsAbleToGoNext] = useState(false)
+  const [visibleCardsCount, setVisibleCardsCount] = useState(3)
+  const [maxIndex, setMaxIndex] = useState(0)
+  const [canNavigate, setCanNavigate] = useState({ prev: false, next: false })
+  const [isMobile, setIsMobile] = useState(false)
 
   const procedures = [
     {
@@ -43,117 +54,128 @@ export function ProceduresCarrousel() {
     },
   ]
 
-  function handleGoNext() {
-    if (!carrouselRef.current) return
+  const CARD_WIDTH = 209
+  const CARD_GAP = 24
+  const MD_BREAKPOINT = 768
 
-    // Calculate new scroll position
-    const cardWidth = 209
-    const newScrollPosition = index * cardWidth + cardWidth
-
-    carrouselRef.current.scrollTo({
-      left: newScrollPosition,
-      behavior: 'smooth',
-    })
-
-    setIndex((prevIndex) => prevIndex + 1)
+  const handleGoNext = () => {
+    if (carrouselRef.current && index < maxIndex && !isMobile) {
+      setIndex((prev) => prev + 1)
+    }
   }
 
-  function handleGoBack() {
-    if (!carrouselRef.current || index === 0) return
-
-    // Calculate new scroll position
-    const cardWidth = 209
-    const newScrollPosition = (index - 1) * cardWidth
-
-    carrouselRef.current.scrollTo({
-      left: newScrollPosition,
-      behavior: 'smooth',
-    })
-
-    setIndex((prevIndex) => prevIndex - 1)
-    setIsAbleToGoNext(true)
+  const handleGoBack = () => {
+    if (carrouselRef.current && index > 0 && !isMobile) {
+      setIndex((prev) => prev - 1)
+    }
   }
 
-  const isAbleToGoBack = index > 0
+  const getContainerWidth = () => {
+    if (!containerRef.current) return 0
+    return containerRef.current.clientWidth > 1536
+      ? containerRef.current.clientWidth - 120
+      : containerRef.current.clientWidth
+  }
+
+  const updateCarouselState = () => {
+    if (!containerRef.current || !carrouselRef.current) return
+
+    const isMobileView = window.innerWidth < MD_BREAKPOINT
+    setIsMobile(isMobileView)
+
+    if (isMobileView) {
+      setVisibleCardsCount(procedures.length)
+      setMaxIndex(0)
+      setCanNavigate({ prev: false, next: false })
+    } else {
+      const containerWidth = getContainerWidth()
+      const visibleWidth = containerWidth - 2 * 210
+      const cardTotalWidth = CARD_WIDTH + CARD_GAP
+      const newVisibleCardsCount = Math.floor(visibleWidth / cardTotalWidth)
+      const newMaxIndex = Math.max(0, procedures.length - newVisibleCardsCount)
+
+      setVisibleCardsCount(newVisibleCardsCount)
+      setMaxIndex(newMaxIndex)
+      setIndex((prev) => Math.min(prev, newMaxIndex))
+      setCanNavigate({
+        prev: index > 0,
+        next: index + 2 < newMaxIndex,
+      })
+    }
+  }
 
   useEffect(() => {
-    if (carrouselRef.current) {
-      const maxIndex = Math.ceil(
-        (carrouselRef.current.scrollWidth - window.innerWidth) / 209,
-      )
-
-      if (index + 1 > maxIndex) {
-        setIsAbleToGoNext(false)
-      }
-    }
+    updateCarouselState()
+    window.addEventListener('resize', updateCarouselState)
+    return () => window.removeEventListener('resize', updateCarouselState)
   }, [index])
 
-  useEffect(() => {
-    const checkCarouselNavigation = () => {
-      if (carrouselRef.current) {
-        const canGoNext = carrouselRef.current.scrollWidth > window.innerWidth
+  const getCarouselStyle = () => {
+    if (isMobile) return undefined
+    const offset = -(index * (CARD_WIDTH + CARD_GAP))
+    return { transform: `translateX(${offset}px)` }
+  }
 
-        console.log(
-          'carrouselRef.current.scrollWidth ->',
-          carrouselRef.current.scrollWidth,
-        )
-
-        console.log('window.innerWidth ->', window.innerWidth)
-
-        setIsAbleToGoNext(canGoNext)
-      }
-    }
-
-    // Check on mount and add resize listener
-    checkCarouselNavigation()
-    window.addEventListener('resize', checkCarouselNavigation)
-
-    return () => {
-      window.removeEventListener('resize', checkCarouselNavigation)
-    }
-  }, [])
+  const shouldShowOverlay = (cardIndex: number) => {
+    if (isMobile) return false
+    const firstVisibleIndex = index
+    const lastVisibleIndex = index + visibleCardsCount - 1
+    return (
+      cardIndex === firstVisibleIndex - 1 || cardIndex === lastVisibleIndex + 3
+    )
+  }
 
   return (
-    <ul
-      style={{
-        transform: `translateX(-${209 * index}px)`,
-      }}
-      ref={carrouselRef}
-      className="flex gap-x-6 mt-20 ml-[210px] pr-[210px] relative transition-transform duration-500"
-    >
-      {procedures.map(({ href, imageHref, title }) => {
-        return (
-          <li key={title}>
-            <CardEspecialidade
-              size="sm"
-              title={title}
-              href={href}
-              imageHref={imageHref}
-            />
-          </li>
-        )
-      })}
+    <div ref={containerRef} className="relative overflow-hidden">
+      <div className={cn('relative', !isMobile && 'px-14')}>
+        <ul
+          ref={carrouselRef}
+          className={cn(
+            'flex gap-x-6 mt-11',
+            isMobile
+              ? 'overflow-x-auto snap-x px-4 snap-mandatory scrollbar-hide'
+              : 'transition-transform duration-500 ease-out',
+            className,
+          )}
+          style={getCarouselStyle()}
+          {...rest}
+        >
+          {procedures.map(({ href, imageHref, title }, cardIndex) => (
+            <li
+              key={title}
+              className={cn('relative flex-shrink-0', isMobile && 'snap-start')}
+            >
+              <CardEspecialidade
+                size="sm"
+                title={title}
+                href={href}
+                imageHref={imageHref}
+              />
+              {shouldShowOverlay(cardIndex) && (
+                <div className="absolute inset-0 bg-white/80" />
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
 
-      {isAbleToGoNext && (
-        <li
-          role="button"
+      {!isMobile && canNavigate.next && (
+        <button
           onClick={handleGoNext}
-          className="absolute w-[230px] group hover:cursor-pointer -right-[56px] h-[408px] bg-white/80 flex items-center justify-center"
+          className="absolute right-0 top-0 h-full w-[210px] flex items-center justify-center"
         >
           <IconButton icon={<ArrowRightIcon />} />
-        </li>
+        </button>
       )}
 
-      {isAbleToGoBack && (
-        <li
-          role="button"
+      {!isMobile && canNavigate.prev && (
+        <button
           onClick={handleGoBack}
-          className="absolute w-[230px] group hover:cursor-pointer h-[408px] bg-white/80 flex items-center justify-center"
+          className="absolute left-0 top-0 h-full w-[210px] flex items-center justify-center"
         >
-          <IconButton icon={<ArrowLeftIcon />} />{' '}
-          {/* You'll need to import ArrowLeftIcon */}
-        </li>
+          <IconButton icon={<ArrowLeftIcon />} />
+        </button>
       )}
-    </ul>
+    </div>
   )
 }

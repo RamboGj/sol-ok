@@ -6,6 +6,7 @@ import { Heading } from '@/components/@solumedi-ui/atoms/Heading/Heading'
 import { IconButton } from '@/components/@solumedi-ui/atoms/IconButton/IconButton'
 import { ArrowRightIcon } from '@/components/@icons/arrow-right'
 import { tv, VariantProps } from 'tailwind-variants'
+import { cn } from '@/lib/utils'
 
 export const cardEspecialidadeStyle = tv({
   slots: {
@@ -35,6 +36,7 @@ export interface CardEspecialidadeProps
   title: string
   imageHref: string
   href: string
+  isPartial?: boolean
 }
 
 export function CardEspecialidade({
@@ -43,15 +45,17 @@ export function CardEspecialidade({
   title,
   className,
   size,
+  isPartial = false,
 }: CardEspecialidadeProps) {
   const { backgroundGradient, backgroundStyle, buttonStyle, titleStyle } =
     cardEspecialidadeStyle({ className, size })
 
   return (
     <NextLink
-      className={
-        'group relative w-[200px] h-[408px] rounded-[40px] bg-cover p-8 overflow-hidden flex flex-col z-0'
-      }
+      className={cn(
+        'group relative w-[200px] h-[408px] rounded-[40px] bg-cover p-8 overflow-hidden flex flex-col z-0',
+        isPartial && 'border border-gray-200',
+      )}
       href={href}
     >
       <div

@@ -19,10 +19,10 @@ export interface TestimonialsProps extends ComponentProps<'div'> {
   testimonials: TestimonialProps[]
 }
 
-export function Testimonials({ testimonials }: TestimonialsProps) {
-  const screenRef = useRef<HTMLDivElement>(null)
+export function Testimonials({ testimonials, ...rest }: TestimonialsProps) {
+  const screenRef = useRef<HTMLDivElement | null>(null)
+  const carrouselRef = useRef<HTMLUListElement>(null)
   const [isMobile, setIsMobile] = useState(false)
-
   const [position, setPosition] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
   const [cursorRotation, setCursorRotation] = useState<number>(0)
@@ -30,20 +30,21 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
     Math.floor(testimonials.length / 2),
   )
 
+  const CARD_WIDTH = 892
+  const CARD_GAP = 177
+
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 1024)
     }
 
-    // Initial check
     handleResize()
-
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   useEffect(() => {
-    if (isMobile) return // Don't track mouse movement on mobile
+    if (isMobile) return
 
     const handleMouseMove = (e: MouseEvent) => {
       const windowWidth = window.innerWidth
@@ -57,8 +58,10 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
     return () => window.removeEventListener('mousemove', handleMouseMove)
   }, [isMobile])
 
-  const handleTestimonialClick = (e: any) => {
-    if (isMobile) return // Disable click handling on mobile
+  const handleTestimonialClick = (
+    e: React.MouseEvent<HTMLUListElement | null>,
+  ) => {
+    if (isMobile || !carrouselRef.current) return
 
     const windowWidth = window.innerWidth
     const mouseXPercentage = (e.clientX / windowWidth) * 100
@@ -69,6 +72,17 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
 
     const newIndex = direction === 'left' ? activeIndex - 1 : activeIndex + 1
     setActiveIndex(newIndex)
+  }
+
+  const getCarouselStyle = () => {
+    if (isMobile || !carrouselRef.current) return undefined
+
+    const containerWidth = window.innerWidth - 24
+    const cardTotalWidth = CARD_WIDTH + CARD_GAP
+    const offset =
+      (containerWidth - CARD_WIDTH) / 2 - activeIndex * cardTotalWidth
+
+    return { transform: `translateX(${offset}px)` }
   }
 
   return (
@@ -82,79 +96,73 @@ export function Testimonials({ testimonials }: TestimonialsProps) {
     >
       <div className="max-w-full overflow-x-auto lg:overflow-x-hidden">
         <ul
+          ref={carrouselRef}
           onClick={handleTestimonialClick}
-          style={{
-            transform: isMobile
-              ? 'none'
-              : `translateX(-${(446 + 177 - 48) * activeIndex}px)`,
-          }}
+          style={getCarouselStyle()}
           className={`
             snap-x snap-mandatory
             flex items-start px-4 gap-x-8
             md:px-8 md:gap-x-20
             lg:px-12 lg:gap-x-[177px] lg:transition-transform lg:duration-1000
           `}
+          {...rest}
         >
           {testimonials.map(
             (
               { personTitle, testimonial, personImg, personSubtitle },
               index,
-            ) => {
-              return (
-                <li key={index} className="flex-shrink-0 snap-center">
-                  <div
-                    data-in-view={activeIndex === index}
-                    className={`
-                      w-[256px] select-none
-                      md:w-[600px]
-                      lg:w-[892px] lg:scale-90 lg:transition-all lg:duration-300
-                      lg:data-[in-view=true]:opacity-100 lg:data-[in-view=true]:scale-100
-                      ${!isMobile && activeIndex !== index ? 'lg:opacity-[24%]' : 'opacity-100'}
-                    `}
+            ) => (
+              <li key={index} className="flex-shrink-0 snap-center relative">
+                <div
+                  data-in-view={activeIndex === index}
+                  className={`
+                    w-[256px] select-none
+                    md:w-[600px]
+                    lg:w-[892px] lg:scale-90 lg:transition-all lg:duration-300
+                    lg:data-[in-view=true]:opacity-100 lg:data-[in-view=true]:scale-100
+                    ${!isMobile && activeIndex !== index ? 'lg:opacity-[24%]' : 'opacity-100'}
+                  `}
+                >
+                  <Heading
+                    className="text-blue500 hidden lg:block"
+                    variant="h2"
                   >
-                    <Heading
-                      className="text-blue500 hidden lg:block"
-                      variant="h2"
-                    >
-                      {testimonial}
-                    </Heading>
-                    <Heading
-                      className="text-blue500 hidden md:block lg:hidden"
-                      variant="h3"
-                    >
-                      {testimonial}
-                    </Heading>
-                    <Heading className="text-blue500 md:hidden" variant="h4">
-                      {testimonial}
-                    </Heading>
+                    {testimonial}
+                  </Heading>
+                  <Heading
+                    className="text-blue500 hidden md:block lg:hidden"
+                    variant="h3"
+                  >
+                    {testimonial}
+                  </Heading>
+                  <Heading className="text-blue500 md:hidden" variant="h4">
+                    {testimonial}
+                  </Heading>
 
-                    <div className="flex items-end gap-x-4 mt-8 md:gap-x-6 md:mt-14">
-                      <Image
-                        width={120}
-                        height={120}
-                        src={personImg}
-                        alt={`${personTitle} Photo.`}
-                      />
-                      <div>
-                        <Paragraph size="md">{personTitle}</Paragraph>
-                        <Paragraph className="text-blue500" size="md">
-                          {personSubtitle}
-                        </Paragraph>
-                      </div>
+                  <div className="flex items-end gap-x-4 mt-8 md:gap-x-6 md:mt-14">
+                    <Image
+                      width={120}
+                      height={120}
+                      src={personImg}
+                      alt={`${personTitle} Photo.`}
+                    />
+                    <div>
+                      <Paragraph size="md">{personTitle}</Paragraph>
+                      <Paragraph className="text-blue500" size="md">
+                        {personSubtitle}
+                      </Paragraph>
                     </div>
                   </div>
-                </li>
-              )
-            },
+                </div>
+              </li>
+            ),
           )}
         </ul>
       </div>
 
       {!isMobile && (
         <div
-          className={`fixed pointer-events-none z-50 ${
-            isHovering ? 'cursor-none' : ''
-          }`}
+          className={`fixed pointer-events-none z-50 ${isHovering ? 'cursor-none' : ''}`}
           style={{
             left: `${position.x}px`,
             top: `${position.y}px`,

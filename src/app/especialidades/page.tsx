@@ -121,11 +121,30 @@ export default function ExpertisesPage() {
       <Header />
 
       <main className="w-full mt-[194px]">
-        <div className="flex justify-between items-end mx-14 2xl:mx-[210px]">
-          <div className="max-w-[586px]">
-            <Heading variant="h1">
-              Encontre a especialidade que você precisa
-            </Heading>
+        <div className="flex-col sm:flex sm:flex-row justify-between items-center sm:items-end sm:mx-14 mx-6 2xl:mx-[210px]">
+          <div className="max-w-full sm:max-w-[450px] lg:max-w-[586px]">
+            <div className="">
+              <div className="opacity-0 lg:opacity-100 lg:h-fit h-0">
+                <Heading variant="h1">
+                  Encontre a especialidade que você precisa
+                </Heading>
+              </div>
+              <div className="opacity-0 md:opacity-100 lg:opacity-0 lg:h-0 md:h-fit h-0">
+                <Heading variant="h2">
+                  Encontre a especialidade que você precisa
+                </Heading>
+              </div>
+              <div className="opacity-0 sm:opacity-100 md:opacity-0 md:h-0 lg:h-0 sm:h-fit h-0">
+                <Heading variant="h3">
+                  Encontre a especialidade que você precisa
+                </Heading>
+              </div>
+              <div className="opacity-100 sm:opacity-0 h-fit sm:h-0">
+                <Heading variant="h4">
+                  Encontre a especialidade que você precisa
+                </Heading>
+              </div>
+            </div>
 
             <Paragraph className="block mt-10 text-blue500">
               São mais de 50 especialidades e uma lista de mais de 12 mil
@@ -134,24 +153,28 @@ export default function ExpertisesPage() {
           </div>
 
           <div className="flex mt-10 gap-x-4">
-            <Button label="Agendar agora" icon={<ArrowRightIcon />} />
+            <Button
+              className="w-full justify-between sm:justify sm:w-auto"
+              label="Agendar agora"
+              icon={<ArrowRightIcon />}
+            />
           </div>
         </div>
 
-        <EspecialidadesCarrousel className="mt-20" />
+        <EspecialidadesCarrousel className="mt-20 " />
       </main>
 
       <section
-        className="flex flex-col mx-[209px] mt-20"
+        className="flex flex-col mx-[50px] sm:mx-12 2xl:mx-[209px] mt-20"
         id="searchForSpeciality"
       >
         <Input
-          className="w-[434px]"
+          className="sm:w-[434px] w-full"
           placeholder="Buscar uma especialidade"
           icon={<SearchIcon />}
         />
 
-        <ul className="grid grid-cols-2 gap-x-[177px] gap-y-[106px] mt-20">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-[177px] gap-y-[106px] mt-20">
           {especialidadesLinks.map(({ links, title }) => {
             return (
               <li className="col-span-1" key={title}>
